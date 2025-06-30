@@ -53,7 +53,12 @@
   ?>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark fs-5">
       <div class="container">
-        <a class="navbar-brand" href="<?= BASEURL; ?>">School Uniform System</a>
+        <a class="navbar-brand d-flex align-items-center gap-2" href="<?= BASEURL; ?>">
+          <img src="<?= BASEURL; ?>/img/ico.svg" alt="Logo" height="40">
+          <img src="<?= BASEURL; ?>/img/smekon.png" alt="Logo" height="40">
+          <span>School Uniform System</span>
+
+        </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
           <span class="navbar-toggler-icon"></span>
         </button>

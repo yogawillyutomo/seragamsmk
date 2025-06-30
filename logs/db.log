@@ -17515,3 +17515,481 @@ Query  : SELECT * FROM seragam ORDER BY sort_order ASC
 Params : []
 ====================
 
+[2025-06-30 12:24:30] 
+[DEBUG] IP:::1 === DEBUG QUERY ===
+Query  : 
+      SELECT
+        s.jurusan,
+        COUNT(DISTINCT s.id) AS total_siswa,
+        COUNT(DISTINCT CASE WHEN t.status != 'batal' THEN s.id END) AS total_lunas
+      FROM siswa s
+      LEFT JOIN transaksi t
+        ON t.siswa_id = s.id
+      GROUP BY s.jurusan
+      ORDER BY s.jurusan
+    
+Params : []
+====================
+
+[2025-06-30 12:24:30] 
+[DEBUG] IP:::1 === DEBUG QUERY ===
+Query  : 
+      SELECT
+        u.nama        AS kasir,
+        role,
+        COUNT(t.id)   AS total_transaksi,
+        SUM(t.total_harga) AS total_pendapatan
+      FROM users u
+      LEFT JOIN transaksi t
+        ON t.kasir_id = u.id
+       AND t.status != 'batal'
+      GROUP BY u.id
+      ORDER BY u.nama
+    
+Params : []
+====================
+
+[2025-06-30 12:24:30] 
+[DEBUG] IP:::1 === DEBUG QUERY ===
+Query  : 
+      SELECT COUNT(*) AS cnt
+      FROM transaksi_detail td
+      JOIN transaksi t 
+        ON t.id = td.transaksi_id
+      WHERE td.status_ambil = 'diambil' 
+        AND t.status != 'batal'
+    
+Params : []
+====================
+
+[2025-06-30 12:24:30] 
+[DEBUG] IP:::1 === DEBUG QUERY ===
+Query  : 
+      SELECT COUNT(*) AS cnt
+      FROM transaksi_detail td
+      JOIN transaksi t 
+        ON t.id = td.transaksi_id
+      WHERE t.status != 'batal'
+    
+Params : []
+====================
+
+[2025-06-30 12:24:31] 
+[DEBUG] IP:::1 === DEBUG QUERY ===
+Query  : 
+      SELECT
+        s.jurusan,
+        COUNT(DISTINCT s.id) AS total_siswa,
+        COUNT(DISTINCT CASE WHEN t.status != 'batal' THEN s.id END) AS total_lunas
+      FROM siswa s
+      LEFT JOIN transaksi t
+        ON t.siswa_id = s.id
+      GROUP BY s.jurusan
+      ORDER BY s.jurusan
+    
+Params : []
+====================
+
+[2025-06-30 12:24:31] 
+[DEBUG] IP:::1 === DEBUG QUERY ===
+Query  : 
+      SELECT
+        u.nama        AS kasir,
+        role,
+        COUNT(t.id)   AS total_transaksi,
+        SUM(t.total_harga) AS total_pendapatan
+      FROM users u
+      LEFT JOIN transaksi t
+        ON t.kasir_id = u.id
+       AND t.status != 'batal'
+      GROUP BY u.id
+      ORDER BY u.nama
+    
+Params : []
+====================
+
+[2025-06-30 12:24:31] 
+[DEBUG] IP:::1 === DEBUG QUERY ===
+Query  : 
+      SELECT COUNT(*) AS cnt
+      FROM transaksi_detail td
+      JOIN transaksi t 
+        ON t.id = td.transaksi_id
+      WHERE td.status_ambil = 'diambil' 
+        AND t.status != 'batal'
+    
+Params : []
+====================
+
+[2025-06-30 12:24:31] 
+[DEBUG] IP:::1 === DEBUG QUERY ===
+Query  : 
+      SELECT COUNT(*) AS cnt
+      FROM transaksi_detail td
+      JOIN transaksi t 
+        ON t.id = td.transaksi_id
+      WHERE t.status != 'batal'
+    
+Params : []
+====================
+
+[2025-06-30 12:24:33] 
+[DEBUG] IP:::1 === DEBUG QUERY ===
+Query  : SELECT * FROM users
+Params : []
+====================
+
+[2025-06-30 12:24:33] 
+[DEBUG] IP:::1 === DEBUG QUERY ===
+Query  : SELECT * FROM users
+Params : []
+====================
+
+[2025-06-30 12:24:36] 
+[DEBUG] IP:::1 === DEBUG QUERY ===
+Query  : 
+        SELECT t.*, u.nama AS kasir, s.nama AS siswa, s.jurusan
+        FROM transaksi t
+        JOIN users u ON t.kasir_id = u.id
+        JOIN siswa s ON t.siswa_id = s.id
+        WHERE 1=1
+     ORDER BY t.tanggal_transaksi DESC LIMIT 10 OFFSET 0
+Params : []
+====================
+
+[2025-06-30 12:24:36] 
+[DEBUG] IP:::1 === DEBUG QUERY ===
+Query  : 
+        SELECT COUNT(*) AS total
+        FROM transaksi t
+        JOIN users u ON t.kasir_id = u.id
+        JOIN siswa s ON t.siswa_id = s.id
+        WHERE 1=1
+    
+Params : []
+====================
+
+[2025-06-30 12:24:36] 
+[DEBUG] IP:::1 === DEBUG QUERY ===
+Query  : SELECT * FROM seragam ORDER BY sort_order ASC
+Params : []
+====================
+
+[2025-06-30 12:24:42] 
+[DEBUG] IP:::1 === DEBUG QUERY ===
+Query  : 
+      SELECT
+        s.jurusan,
+        COUNT(DISTINCT s.id) AS total_siswa,
+        COUNT(DISTINCT CASE WHEN t.status != 'batal' THEN s.id END) AS total_lunas
+      FROM siswa s
+      LEFT JOIN transaksi t
+        ON t.siswa_id = s.id
+      GROUP BY s.jurusan
+      ORDER BY s.jurusan
+    
+Params : []
+====================
+
+[2025-06-30 12:24:42] 
+[DEBUG] IP:::1 === DEBUG QUERY ===
+Query  : 
+      SELECT
+        u.nama        AS kasir,
+        role,
+        COUNT(t.id)   AS total_transaksi,
+        SUM(t.total_harga) AS total_pendapatan
+      FROM users u
+      LEFT JOIN transaksi t
+        ON t.kasir_id = u.id
+       AND t.status != 'batal'
+      GROUP BY u.id
+      ORDER BY u.nama
+    
+Params : []
+====================
+
+[2025-06-30 12:24:42] 
+[DEBUG] IP:::1 === DEBUG QUERY ===
+Query  : 
+      SELECT COUNT(*) AS cnt
+      FROM transaksi_detail td
+      JOIN transaksi t 
+        ON t.id = td.transaksi_id
+      WHERE td.status_ambil = 'diambil' 
+        AND t.status != 'batal'
+    
+Params : []
+====================
+
+[2025-06-30 12:24:42] 
+[DEBUG] IP:::1 === DEBUG QUERY ===
+Query  : 
+      SELECT COUNT(*) AS cnt
+      FROM transaksi_detail td
+      JOIN transaksi t 
+        ON t.id = td.transaksi_id
+      WHERE t.status != 'batal'
+    
+Params : []
+====================
+
+[2025-06-30 12:28:06] 
+[DEBUG] IP:::1 === DEBUG QUERY ===
+Query  : 
+      SELECT
+        s.jurusan,
+        COUNT(DISTINCT s.id) AS total_siswa,
+        COUNT(DISTINCT CASE WHEN t.status != 'batal' THEN s.id END) AS total_lunas
+      FROM siswa s
+      LEFT JOIN transaksi t
+        ON t.siswa_id = s.id
+      GROUP BY s.jurusan
+      ORDER BY s.jurusan
+    
+Params : []
+====================
+
+[2025-06-30 12:28:06] 
+[DEBUG] IP:::1 === DEBUG QUERY ===
+Query  : 
+      SELECT
+        u.nama        AS kasir,
+        role,
+        COUNT(t.id)   AS total_transaksi,
+        SUM(t.total_harga) AS total_pendapatan
+      FROM users u
+      LEFT JOIN transaksi t
+        ON t.kasir_id = u.id
+       AND t.status != 'batal'
+      GROUP BY u.id
+      ORDER BY u.nama
+    
+Params : []
+====================
+
+[2025-06-30 12:28:06] 
+[DEBUG] IP:::1 === DEBUG QUERY ===
+Query  : 
+      SELECT COUNT(*) AS cnt
+      FROM transaksi_detail td
+      JOIN transaksi t 
+        ON t.id = td.transaksi_id
+      WHERE td.status_ambil = 'diambil' 
+        AND t.status != 'batal'
+    
+Params : []
+====================
+
+[2025-06-30 12:28:06] 
+[DEBUG] IP:::1 === DEBUG QUERY ===
+Query  : 
+      SELECT COUNT(*) AS cnt
+      FROM transaksi_detail td
+      JOIN transaksi t 
+        ON t.id = td.transaksi_id
+      WHERE t.status != 'batal'
+    
+Params : []
+====================
+
+[2025-06-30 12:28:19] 
+[DEBUG] IP:::1 === DEBUG QUERY ===
+Query  : 
+      SELECT
+        s.jurusan,
+        COUNT(DISTINCT s.id) AS total_siswa,
+        COUNT(DISTINCT CASE WHEN t.status != 'batal' THEN s.id END) AS total_lunas
+      FROM siswa s
+      LEFT JOIN transaksi t
+        ON t.siswa_id = s.id
+      GROUP BY s.jurusan
+      ORDER BY s.jurusan
+    
+Params : []
+====================
+
+[2025-06-30 12:28:19] 
+[DEBUG] IP:::1 === DEBUG QUERY ===
+Query  : 
+      SELECT
+        u.nama        AS kasir,
+        role,
+        COUNT(t.id)   AS total_transaksi,
+        SUM(t.total_harga) AS total_pendapatan
+      FROM users u
+      LEFT JOIN transaksi t
+        ON t.kasir_id = u.id
+       AND t.status != 'batal'
+      GROUP BY u.id
+      ORDER BY u.nama
+    
+Params : []
+====================
+
+[2025-06-30 12:28:19] 
+[DEBUG] IP:::1 === DEBUG QUERY ===
+Query  : 
+      SELECT COUNT(*) AS cnt
+      FROM transaksi_detail td
+      JOIN transaksi t 
+        ON t.id = td.transaksi_id
+      WHERE td.status_ambil = 'diambil' 
+        AND t.status != 'batal'
+    
+Params : []
+====================
+
+[2025-06-30 12:28:19] 
+[DEBUG] IP:::1 === DEBUG QUERY ===
+Query  : 
+      SELECT COUNT(*) AS cnt
+      FROM transaksi_detail td
+      JOIN transaksi t 
+        ON t.id = td.transaksi_id
+      WHERE t.status != 'batal'
+    
+Params : []
+====================
+
+[2025-06-30 12:28:20] 
+[DEBUG] IP:::1 === DEBUG QUERY ===
+Query  : 
+      SELECT
+        s.jurusan,
+        COUNT(DISTINCT s.id) AS total_siswa,
+        COUNT(DISTINCT CASE WHEN t.status != 'batal' THEN s.id END) AS total_lunas
+      FROM siswa s
+      LEFT JOIN transaksi t
+        ON t.siswa_id = s.id
+      GROUP BY s.jurusan
+      ORDER BY s.jurusan
+    
+Params : []
+====================
+
+[2025-06-30 12:28:20] 
+[DEBUG] IP:::1 === DEBUG QUERY ===
+Query  : 
+      SELECT
+        u.nama        AS kasir,
+        role,
+        COUNT(t.id)   AS total_transaksi,
+        SUM(t.total_harga) AS total_pendapatan
+      FROM users u
+      LEFT JOIN transaksi t
+        ON t.kasir_id = u.id
+       AND t.status != 'batal'
+      GROUP BY u.id
+      ORDER BY u.nama
+    
+Params : []
+====================
+
+[2025-06-30 12:28:20] 
+[DEBUG] IP:::1 === DEBUG QUERY ===
+Query  : 
+      SELECT COUNT(*) AS cnt
+      FROM transaksi_detail td
+      JOIN transaksi t 
+        ON t.id = td.transaksi_id
+      WHERE td.status_ambil = 'diambil' 
+        AND t.status != 'batal'
+    
+Params : []
+====================
+
+[2025-06-30 12:28:20] 
+[DEBUG] IP:::1 === DEBUG QUERY ===
+Query  : 
+      SELECT COUNT(*) AS cnt
+      FROM transaksi_detail td
+      JOIN transaksi t 
+        ON t.id = td.transaksi_id
+      WHERE t.status != 'batal'
+    
+Params : []
+====================
+
+[2025-06-30 12:31:31] 
+[DEBUG] IP:::1 === DEBUG QUERY ===
+Query  : 
+      SELECT
+        s.jurusan,
+        COUNT(DISTINCT s.id) AS total_siswa,
+        COUNT(DISTINCT CASE WHEN t.status != 'batal' THEN s.id END) AS total_lunas
+      FROM siswa s
+      LEFT JOIN transaksi t
+        ON t.siswa_id = s.id
+      GROUP BY s.jurusan
+      ORDER BY s.jurusan
+    
+Params : []
+====================
+
+[2025-06-30 12:31:31] 
+[DEBUG] IP:::1 === DEBUG QUERY ===
+Query  : 
+      SELECT COUNT(*) AS cnt
+      FROM transaksi_detail td
+      JOIN transaksi t 
+        ON t.id = td.transaksi_id
+      WHERE td.status_ambil = 'diambil' 
+        AND t.status != 'batal'
+    
+Params : []
+====================
+
+[2025-06-30 12:31:31] 
+[DEBUG] IP:::1 === DEBUG QUERY ===
+Query  : 
+      SELECT COUNT(*) AS cnt
+      FROM transaksi_detail td
+      JOIN transaksi t 
+        ON t.id = td.transaksi_id
+      WHERE t.status != 'batal'
+    
+Params : []
+====================
+
+[2025-06-30 12:31:47] 
+[DEBUG] IP:::1 === DEBUG QUERY ===
+Query  : 
+      SELECT
+        s.jurusan,
+        COUNT(DISTINCT s.id) AS total_siswa,
+        COUNT(DISTINCT CASE WHEN t.status != 'batal' THEN s.id END) AS total_lunas
+      FROM siswa s
+      LEFT JOIN transaksi t
+        ON t.siswa_id = s.id
+      GROUP BY s.jurusan
+      ORDER BY s.jurusan
+    
+Params : []
+====================
+
+[2025-06-30 12:31:47] 
+[DEBUG] IP:::1 === DEBUG QUERY ===
+Query  : 
+      SELECT COUNT(*) AS cnt
+      FROM transaksi_detail td
+      JOIN transaksi t 
+        ON t.id = td.transaksi_id
+      WHERE td.status_ambil = 'diambil' 
+        AND t.status != 'batal'
+    
+Params : []
+====================
+
+[2025-06-30 12:31:47] 
+[DEBUG] IP:::1 === DEBUG QUERY ===
+Query  : 
+      SELECT COUNT(*) AS cnt
+      FROM transaksi_detail td
+      JOIN transaksi t 
+        ON t.id = td.transaksi_id
+      WHERE t.status != 'batal'
+    
+Params : []
+====================
+
