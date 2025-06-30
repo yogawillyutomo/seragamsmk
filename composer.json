@@ -1,0 +1,12 @@
+{
+    "name": "school-uniform-system/app",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "w"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {}
+}

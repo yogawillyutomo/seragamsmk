@@ -1,0 +1,343 @@
+          <!-- <form id="formTambahTransaksi">
+                    <div class="form-group">
+                        <label for="siswa">Cari Siswa</label>
+                        <input type="text" class="form-control" id="siswa" placeholder="Masukkan nama">
+                        <input type="hidden" id="siswa_id" name="siswa_id">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="nis">NIS</label>
+                        <input type="text" id="nis" class="form-control" placeholder="NIS" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label for="jurusan">Jurusan</label>
+                        <input type="text" id="jurusan" class="form-control" placeholder="Jurusan" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label for="no_hp">No HP</label>
+                        <input type="text" id="no_hp" class="form-control" placeholder="No HP" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label for="metode">Metode Pembayaran</label>
+                        <select class="form-control" id="metode" name="metode_pembayaran" required>
+                            <option value="cash">Cash</option>
+                            <option value="qris">QRIS</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="total">Total Harga</label>
+                        <input type="number" class="form-control" id="total" name="total_harga" required>
+                    </div>
+                    <button type="submit" class="btn btn-success">Simpan</button>
+                </form> -->
+
+
+                $(document).ready(function() {
+                    let seragamData = [{
+                            id: 1,
+                            nama: "Baju Putih Osis",
+                            harga: 100000
+                        },
+                        {
+                            id: 2,
+                            nama: "Celana Abu-abu Osis",
+                            harga: 80000
+                        },
+                        {
+                            id: 3,
+                            nama: "Baju Pramuka",
+                            harga: 120000
+                        },
+                    ];
+            
+                    function renderSeragamList() {
+                        let html = "";
+                        seragamData.forEach((item, index) => {
+                            html += `<tr>
+                            <td>${item.nama}</td>
+                            <td>
+                                <select class="form-control status" data-index="${index}">
+                                    <option value="tidak_beli">Tidak Beli</option>
+                                    <option value="beli">Beli</option>
+                                    <option value="berjilbab">Berjilbab</option>
+                                </select>
+                            </td>
+                            <td>
+                                <select class="form-control ukuran" data-index="${index}">
+                                    <option value="S">S</option>
+                                    <option value="M">M</option>
+                                    <option value="L">L</option>
+                                    <option value="XL">XL</option>
+                                    <option value="XXL">XXL</option>
+                                    <option value="custom">Custom</option>
+                                </select>
+                            </td>
+                            <td>
+                                <input type="number" class="form-control ukuranCustom" data-index="${index}" disabled>
+                            </td>
+                            <td class="harga" data-index="${index}">0</td>
+                        </tr>`;
+                        });
+                        $("#seragamList").html(html);
+                    }
+            
+                    renderSeragamList();
+            
+                    $(document).on("change", ".status, .ukuran, .ukuranCustom", function() {
+                        let index = $(this).data("index");
+                        let status = $(".status[data-index='" + index + "']").val();
+                        let ukuran = $(".ukuran[data-index='" + index + "']").val();
+                        let ukuranCustom = $(".ukuranCustom[data-index='" + index + "']").val();
+                        let hargaDasar = seragamData[index].harga;
+                        let hargaTambahan = 0;
+            
+                        if (status === "berjilbab") hargaTambahan += 20000;
+                        if (ukuran === "custom" && ukuranCustom) hargaTambahan += (parseInt(ukuranCustom) - 100) * 2000;
+            
+                        let totalHarga = (status !== "tidak_beli") ? hargaDasar + hargaTambahan : 0;
+                        $(".harga[data-index='" + index + "']").text(totalHarga);
+                        updateTotal();
+                    });
+            
+                    $(document).on("change", ".ukuran", function() {
+                        let index = $(this).data("index");
+                        let ukuran = $(this).val();
+                        let inputUkuranCustom = $(".ukuranCustom[data-index='" + index + "']");
+            
+                        if (ukuran === "custom") {
+                            inputUkuranCustom.prop("disabled", false);
+                        } else {
+                            inputUkuranCustom.prop("disabled", true).val("");
+                        }
+                    });
+            
+                    function updateTotal() {
+                        let total = 0;
+                        $(".harga").each(function() {
+                            total += parseInt($(this).text());
+                        });
+                        $("#total").val(total);
+                    }
+                });
+
+
+
+
+                <!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cetak Kwitansi</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .kwitansi-container {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .kwitansi {
+            width: 90%;
+            border: 1px solid #000;
+            padding: 10px;
+            margin-bottom: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        td, th {
+            border: 1px solid black;
+            padding: 5px;
+        }
+        .total {
+            font-weight: bold;
+        }
+        .terbilang {
+            margin-top: 10px;
+            font-style: italic;
+        }
+        .tanda-tangan {
+            text-align: right;
+            margin-top: 20px;
+        }
+        .no-print {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <button class="no-print" onclick="window.print()">Cetak Kwitansi</button>
+    <div class="kwitansi-container">
+        <div class="kwitansi">
+            <h3>Kwitansi</h3>
+            <p>No Kwitansi: <span id="no_kwitansi"></span></p>
+            <p>No Pendaftaran: <span id="no_pendaftaran"></span></p>
+            <p>Jurusan: <span id="jurusan"></span></p>
+            <p>No HP: <span id="no_hp"></span></p>
+            <p>Telah diterima dari: <span id="nama_siswa"></span></p>
+            <p>Guna Membayar: Bahan pakaian</p>
+            
+            <table>
+                <tr>
+                    <th>Item</th>
+                    <th>Jumlah</th>
+                    <th>Harga</th>
+                </tr>
+                <tbody id="item_list"></tbody>
+            </table>
+            
+            <p class="total">Total: Rp <span id="total_harga"></span></p>
+            <p class="terbilang">Terbilang: <span id="terbilang"></span></p>
+            <p class="tanda-tangan">Purwokerto, <span id="tanggal"></span><br>Petugas<br><br>______________</p>
+        </div>
+        <div class="kwitansi">(Kwitansi untuk Gudang, format sama)</div>
+        <div class="kwitansi">(Kwitansi untuk Siswa, format sama)</div>
+    </div>
+    
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            let transaksi = JSON.parse(localStorage.getItem("transaksi"));
+            if (transaksi) {
+                document.getElementById("no_kwitansi").textContent = transaksi.no_kwitansi;
+                document.getElementById("no_pendaftaran").textContent = transaksi.no_pendaftaran;
+                document.getElementById("jurusan").textContent = transaksi.jurusan;
+                document.getElementById("no_hp").textContent = transaksi.no_hp;
+                document.getElementById("nama_siswa").textContent = transaksi.nama_siswa;
+                document.getElementById("total_harga").textContent = transaksi.total_harga;
+                document.getElementById("terbilang").textContent = transaksi.terbilang;
+                document.getElementById("tanggal").textContent = new Date().toLocaleDateString("id-ID");
+                
+                let itemList = document.getElementById("item_list");
+                transaksi.items.forEach(item => {
+                    let row = `<tr>
+                        <td>${item.nama}</td>
+                        <td>${item.jumlah}</td>
+                        <td>Rp ${item.harga}</td>
+                    </tr>`;
+                    itemList.innerHTML += row;
+                });
+            }
+        });
+    </script>
+</body>
+</html>
+
+
+
+$(document).on("click", "#btnCetakKwitansi", function() {
+    let siswa = $("#siswa").val();
+    let totalHarga = $("#total").val();
+
+    if (!siswa) {
+        alert("Pilih siswa terlebih dahulu!");
+        return;
+    }
+
+    let items = "";
+    $("#seragamList tr").each(function() {
+        let namaSeragam = $(this).find("td:eq(0)").text();
+        let status = $(this).find(".status").val();
+        let ukuran = $(this).find(".ukuran").val();
+        let ukuranCustom = $(this).find(".ukuranCustom").val();
+        let harga = $(this).find(".harga").text().replace("Rp. ", "");
+
+        if (status !== "tidak_beli") {
+            let ukuranText = ukuran === "custom" ? `Custom (${ukuranCustom} cm)` : ukuran;
+            items += `
+            <tr>
+                <td>${namaSeragam}</td>
+                <td>${ukuranText}</td>
+                <td>Rp. ${parseInt(harga).toLocaleString()}</td>
+            </tr>
+        `;
+        }
+    });
+
+    if (!items) {
+        alert("Tidak ada item yang dibeli!");
+        return;
+    }
+
+    let kwitansiWindow = window.open("", "_blank");
+    kwitansiWindow.document.write(`
+    <html>
+    <head>
+        <title>Kwitansi Pembayaran</title>
+        <style>
+            body { font-family: Arial, sans-serif; margin: 20px; }
+            h2 { text-align: center; margin-bottom: 5px; }
+            .kwitansi { border: 1px dashed black; padding: 15px; margin-bottom: 10px; }
+            table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+            table, th, td { border: 1px solid black; padding: 5px; text-align: left; }
+            .total { font-weight: bold; text-align: right; margin-top: 10px; }
+            .kop { text-align: center; font-weight: bold; margin-bottom: 10px; }
+        </style>
+    </head>
+    <body onload="window.print(); window.onafterprint = window.close();">
+        
+        <!-- Kwitansi Kasir -->
+        <div class="kwitansi">
+            <div class="kop">Kwitansi Pembayaran (Kasir)</div>
+            <p><strong>Nama Siswa:</strong> ${siswa}</p>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Nama Seragam</th>
+                        <th>Ukuran</th>
+                        <th>Harga</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    ${items}
+                </tbody>
+            </table>
+            <p class="total">Total: Rp. ${parseInt(totalHarga).toLocaleString()}</p>
+        </div>
+
+        <!-- Kwitansi Siswa -->
+        <div class="kwitansi">
+            <div class="kop">Kwitansi Pembayaran (Siswa)</div>
+            <p><strong>Nama Siswa:</strong> ${siswa}</p>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Nama Seragam</th>
+                        <th>Ukuran</th>
+                        <th>Harga</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    ${items}
+                </tbody>
+            </table>
+            <p class="total">Total: Rp. ${parseInt(totalHarga).toLocaleString()}</p>
+        </div>
+
+        <!-- Kwitansi Gudang -->
+        <div class="kwitansi">
+            <div class="kop">Kwitansi Pembayaran (Gudang)</div>
+            <p><strong>Nama Siswa:</strong> ${siswa}</p>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Nama Seragam</th>
+                        <th>Ukuran</th>
+                        <th>Harga</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    ${items}
+                </tbody>
+            </table>
+            <p class="total">Total: Rp. ${parseInt(totalHarga).toLocaleString()}</p>
+        </div>
+
+    </body>
+    </html>
+`);
+    kwitansiWindow.document.close();
+});

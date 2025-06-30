@@ -1,0 +1,213 @@
+[2025-04-17 03:13:06] UserID:1 IP:::1 - Logout
+[2025-04-17 03:13:10] UserID:1 IP:::1 - Berhasil login
+[2025-04-17 10:50:26] [INFO] IP:::1
+[UserID:1] Logout
+
+[2025-04-17 10:57:41] [INFO] IP:::1
+[UserID:1] Logout
+
+[2025-04-17 10:57:46] [INFO] IP:::1
+[UserID:1] Berhasil login
+
+[2025-04-17 10:59:25] [INFO] 
+IP:::1
+[UserID:1] Logout
+
+[2025-04-17 11:00:02] 
+[INFO] IP:::1 [UserID:1] Berhasil login
+
+[2025-04-17 11:10:07] 
+[INFO] IP:::1 [UserID:1] Logout
+
+[2025-04-17 11:38:47] 
+[INFO] IP:::1 [UserID:1] Berhasil login
+
+[2025-04-17 11:39:25] 
+[INFO] IP:::1 [UserID:1] Logout
+
+[2025-04-17 11:39:32] 
+[INFO] IP:::1 [UserID:1] Berhasil login
+
+[2025-04-17 11:43:40] 
+[INFO] IP:::1 [UserID:1] Logout
+
+[2025-04-17 11:43:45] 
+[INFO] IP:::1 [UserID:1] Berhasil login
+
+[2025-04-17 11:55:44] 
+[INFO] IP:::1 [UserID:1] Logout
+
+[2025-04-17 11:55:47] 
+[INFO] IP:::1 [UserID:1] Berhasil login
+
+[2025-04-17 11:59:19] 
+[INFO] IP:::1 [UserID:1] Logout
+
+[2025-04-17 11:59:22] 
+[INFO] IP:::1 [UserID:1] Berhasil login
+
+[2025-04-17 12:01:01] 
+[INFO] IP:::1 [UserID:1] Logout
+
+[2025-04-17 12:01:04] 
+[INFO] IP:::1 [UserID:1] Berhasil login
+
+[2025-04-17 12:02:19] 
+[INFO] IP:::1 [UserID:1] Logout
+
+[2025-04-17 12:02:24] 
+[INFO] IP:::1 [UserID:1] Berhasil login
+
+[2025-04-27 14:52:16] 
+[INFO] IP:::1 [UserID:0] Gagal login dengan username: Willy
+
+[2025-04-27 14:52:20] 
+[INFO] IP:::1 [UserID:0] Gagal login dengan username: admin
+
+[2025-04-27 14:53:49] 
+[INFO] IP:::1 [UserID:0] Gagal login dengan username: admin
+
+[2025-04-27 14:53:56] 
+[INFO] IP:::1 [UserID:17] Berhasil login
+
+[2025-04-27 14:54:44] 
+[INFO] IP:::1 [UserID:17] Logout
+
+[2025-04-27 14:54:49] 
+[INFO] IP:::1 [UserID:1] Berhasil login
+
+[2025-04-27 15:28:14] 
+[INFO] IP:::1 [UserID:1] Logout
+
+[2025-04-27 15:28:17] 
+[INFO] IP:::1 [UserID:27] Berhasil login
+
+[2025-04-27 15:28:21] 
+[INFO] IP:::1 [UserID:27] Logout
+
+[2025-04-27 15:28:25] 
+[INFO] IP:::1 [UserID:1] Berhasil login
+
+[2025-04-27 16:01:17] 
+[INFO] IP:::1 [UserID:1] Logout
+
+[2025-04-27 16:01:22] 
+[INFO] IP:::1 [UserID:1] Berhasil login
+
+[2025-04-27 16:36:36] 
+[INFO] IP:::1 [UserID:1] Logout
+
+[2025-04-27 16:36:41] 
+[INFO] IP:::1 [UserID:27] Berhasil login
+
+[2025-04-27 16:42:26] 
+[INFO] IP:::1 [UserID:27] Logout
+
+[2025-04-27 16:42:32] 
+[INFO] IP:::1 [UserID:0] Gagal login dengan username: jundi
+
+[2025-04-27 16:42:38] 
+[INFO] IP:::1 [UserID:28] Berhasil login
+
+[2025-04-27 16:42:47] 
+[INFO] IP:::1 [UserID:28] Logout
+
+[2025-04-27 16:42:53] 
+[INFO] IP:::1 [UserID:1] Berhasil login
+
+[2025-04-27 17:40:06] 
+[INFO] IP:::1 [UserID:1] Berhasil login
+
+[2025-04-28 16:06:24] 
+[INFO] IP:::1 [UserID:1] Berhasil login
+
+[2025-06-09 11:05:19] 
+[INFO] IP:::1 [UserID:0] Gagal login dengan username: admin
+
+[2025-06-09 11:05:27] 
+[INFO] IP:::1 [UserID:1] Berhasil login
+
+[2025-06-09 11:06:05] 
+[INFO] IP:::1 [UserID:1] Logout
+
+[2025-06-09 11:06:11] 
+[INFO] IP:::1 [UserID:20] Berhasil login
+
+[2025-06-30 07:41:44] 
+[INFO] IP:::1 [UserID:1] Berhasil login
+
+[2025-06-30 07:46:31] 
+[INFO] IP:::1 [UserID:20] Berhasil login
+
+[2025-06-30 07:47:05] 
+[INFO] IP:::1 [UserID:20] Logout
+
+[2025-06-30 07:47:15] 
+[INFO] IP:::1 [UserID:29] Berhasil login
+
+[2025-06-30 08:35:09] 
+[INFO] IP:::1 [UserID:1] Logout
+
+[2025-06-30 09:11:18] 
+[INFO] IP:::1 [UserID:1] Logout
+
+[2025-06-30 09:11:25] 
+[INFO] IP:::1 [UserID:1] Berhasil login
+
+[2025-06-30 09:14:49] 
+[INFO] IP:::1 [UserID:29] Logout
+
+[2025-06-30 09:15:02] 
+[INFO] IP:::1 [UserID:0] Gagal login dengan username: YogaWilly
+
+[2025-06-30 09:15:17] 
+[INFO] IP:::1 [UserID:0] Gagal login dengan username: YogaWilly
+
+[2025-06-30 09:15:50] 
+[INFO] IP:::1 [UserID:0] Gagal login dengan username: YogaWilly
+
+[2025-06-30 09:16:11] 
+[INFO] IP:::1 [UserID:0] Gagal login dengan username: MuhammadJundi
+
+[2025-06-30 09:16:23] 
+[INFO] IP:::1 [UserID:0] Gagal login dengan username: yogawilly
+
+[2025-06-30 09:16:43] 
+[INFO] IP:::1 [UserID:1] Berhasil login
+
+[2025-06-30 09:16:55] 
+[INFO] IP:::1 [UserID:1] Logout
+
+[2025-06-30 09:17:08] 
+[INFO] IP:::1 [UserID:0] Gagal login dengan username: Hanif
+
+[2025-06-30 09:17:32] 
+[INFO] IP:::1 [UserID:0] Gagal login dengan username: Hanif
+
+[2025-06-30 09:18:11] 
+[INFO] IP:::1 [UserID:237] Berhasil login
+
+[2025-06-30 09:18:15] 
+[INFO] IP:::1 [UserID:237] Logout
+
+[2025-06-30 09:18:33] 
+[INFO] IP:::1 [UserID:237] Berhasil login
+
+[2025-06-30 09:18:52] 
+[INFO] IP:::1 [UserID:237] Logout
+
+[2025-06-30 09:18:57] 
+[INFO] IP:::1 [UserID:0] Gagal login dengan username: gudang
+
+[2025-06-30 09:19:03] 
+[INFO] IP:::1 [UserID:17] Berhasil login
+
+[2025-06-30 09:22:27] 
+[INFO] IP:::1 [UserID:17] Logout
+
+[2025-06-30 09:22:32] 
+[INFO] IP:::1 [UserID:0] Gagal login dengan username: gudang
+
+[2025-06-30 09:22:38] 
+[INFO] IP:::1 [UserID:17] Berhasil login
+

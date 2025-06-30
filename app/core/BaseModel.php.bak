@@ -1,0 +1,272 @@
+<?php
+
+abstract class BaseModel
+{
+    protected Database $db;
+    protected int $queryCount = 0;
+    protected float $executionTime = 0;
+
+    protected array $defaultSearchFields = [];
+    protected array $defaultExactFields = [];
+    protected string $defaultTable = '';
+
+    protected string $defaultSortField = 'id';
+    protected string $defaultSortDirection = 'DESC';
+    protected array $allowedSortFields = [];
+
+    protected bool $useSoftDelete = false; // aktifkan untuk model tertentu
+
+    public function __construct()
+    {
+        $this->db = Database::getInstance();
+    }
+
+    protected function getAllowedSortFields(): array
+    {
+        return $this->allowedSortFields;
+    }
+
+    protected function logQuery(): void
+    {
+        $this->queryCount++;
+    }
+
+    public function getQueryCount(): int
+    {
+        return $this->queryCount;
+    }
+
+    public function getExecutionTime(): float
+    {
+        return $this->executionTime;
+    }
+
+    protected function insert(string $query, array $params = []): int|false
+    {
+        try {
+            $this->logQuery();
+            $start = microtime(true);
+
+            $this->db->query($query);
+            $this->db->bindArray($params);
+            Logger::logQuery($query, $params);
+
+            $result = $this->db->execute() ? $this->db->lastInserted() : false;
+            $this->executionTime += microtime(true) - $start;
+
+            return $result;
+        } catch (PDOException $e) {
+            Logger::logError($e, 'Insert Query');
+            return false;
+        }
+    }
+
+    protected function insertAuto(string $table, array $data = []): int|false
+    {
+        $fields = implode(", ", array_keys($data));
+        $placeholders = ":" . implode(", :", array_keys($data));
+        $query = "INSERT INTO {$table} ($fields) VALUES ($placeholders)";
+        return $this->insert($query, $data);
+    }
+
+    protected function updateAuto(string $table, string $where, array $data = []): bool
+    {
+        $set = [];
+        foreach ($data as $key => $value) {
+            $set[] = "$key = :$key";
+        }
+        $query = "UPDATE {$table} SET " . implode(", ", $set) . " WHERE {$where}";
+        return $this->executeQuery($query, $data);
+    }
+
+    protected function softDelete(string $table, string $idField, int $id): bool
+    {
+        if (!$this->useSoftDelete) return false;
+
+        $query = "UPDATE {$table} SET deleted_at = NOW() WHERE {$idField} = :id";
+        return $this->executeQuery($query, [':id' => $id]);
+    }
+
+    protected function bulkDelete(string $table, string $idField, array $ids = []): bool
+    {
+        if (empty($ids)) return false;
+
+        $placeholders = [];
+        $params = [];
+        foreach ($ids as $i => $id) {
+            $key = ":id{$i}";
+            $placeholders[] = $key;
+            $params[$key] = $id;
+        }
+
+        if ($this->useSoftDelete) {
+            $query = "UPDATE {$table} SET deleted_at = NOW() WHERE {$idField} IN (" . implode(',', $placeholders) . ")";
+        } else {
+            $query = "DELETE FROM {$table} WHERE {$idField} IN (" . implode(',', $placeholders) . ")";
+        }
+
+        return $this->executeQuery($query, $params);
+    }
+
+    protected function executeQuery(string $query, array $params = []): bool
+    {
+        try {
+            $this->logQuery();
+            $start = microtime(true);
+
+            $this->db->query($query);
+            $this->db->bindArray($params);
+            Logger::logQuery($query, $params);
+
+            $result = $this->db->execute();
+            $this->executionTime += microtime(true) - $start;
+
+            return $result;
+        } catch (PDOException $e) {
+            Logger::logError($e, 'Execute Query');
+            return false;
+        }
+    }
+
+    protected function fetchAll(string $query, array $params = []): array
+    {
+        try {
+            $this->logQuery();
+            $start = microtime(true);
+
+            $this->db->query($query);
+            $this->db->bindArray($params);
+            Logger::logQuery($query, $params);
+
+            $result = $this->db->resultSet();
+            $this->executionTime += microtime(true) - $start;
+
+            return $result;
+        } catch (PDOException $e) {
+            Logger::logError($e, 'FetchAll');
+            return [];
+        }
+    }
+
+    protected function fetchOne(string $query, array $params = []): mixed
+    {
+        try {
+            $this->logQuery();
+            $start = microtime(true);
+
+            $this->db->query($query);
+            $this->db->bindArray($params);
+            Logger::logQuery($query, $params);
+
+            $result = $this->db->single();
+            $this->executionTime += microtime(true) - $start;
+
+            return $result;
+        } catch (PDOException $e) {
+            Logger::logError($e, 'FetchOne');
+            return null;
+        }
+    }
+
+    protected function countAll(array $filters = [], string $customTable = '', ?array $searchFields = null, ?array $exactFields = null): int
+    {
+        $table = $customTable ?: $this->defaultTable;
+        $searchFields ??= $this->defaultSearchFields;
+        $exactFields ??= $this->defaultExactFields;
+
+        $query = "SELECT COUNT(*) as total FROM {$table} WHERE 1=1";
+        $params = [];
+
+        if ($this->useSoftDelete) {
+            $query .= " AND deleted_at IS NULL";
+        }
+
+        if (!empty($filters['keyword']) && !empty($searchFields)) {
+            $likeParts = [];
+            foreach ($searchFields as $i => $field) {
+                $key = ":keyword{$i}";
+                $likeParts[] = "$field LIKE $key";
+                $params[$key] = '%' . $filters['keyword'] . '%';
+            }
+            $query .= " AND (" . implode(' OR ', $likeParts) . ")";
+        }
+
+        foreach ($exactFields as $field) {
+            if (!empty($filters[$field])) {
+                $key = ":$field";
+                $query .= " AND $field = $key";
+                $params[$key] = $filters[$field];
+            }
+        }
+
+        try {
+            $this->logQuery();
+            $start = microtime(true);
+            $this->db->query($query);
+            $this->db->bindArray($params);
+            Logger::logQuery($query, $params);
+            $result = $this->db->single();
+            $this->executionTime += microtime(true) - $start;
+
+            return (int)($result['total'] ?? 0);
+        } catch (PDOException $e) {
+            Logger::logError($e, 'CountAll');
+            return 0;
+        }
+    }
+
+    protected function filterAndPaginate(array $filters = [], string $customTable = '', ?array $searchFields = null, ?array $exactFields = null): array
+    {
+        $table = $customTable ?: $this->defaultTable;
+        $searchFields ??= $this->defaultSearchFields;
+        $exactFields ??= $this->defaultExactFields;
+
+        $query = "SELECT * FROM {$table} WHERE 1=1";
+        $params = [];
+
+        if ($this->useSoftDelete) {
+            $query .= " AND deleted_at IS NULL";
+        }
+
+        if (!empty($filters['keyword']) && !empty($searchFields)) {
+            $likeParts = [];
+            foreach ($searchFields as $i => $field) {
+                $key = ":keyword{$i}";
+                $likeParts[] = "$field LIKE $key";
+                $params[$key] = '%' . $filters['keyword'] . '%';
+            }
+            $query .= " AND (" . implode(' OR ', $likeParts) . ")";
+        }
+
+        foreach ($exactFields as $field) {
+            if (!empty($filters[$field])) {
+                $key = ":$field";
+                $query .= " AND $field = $key";
+                $params[$key] = $filters[$field];
+            }
+        }
+
+        // Sorting
+        $sortField = $this->defaultSortField;
+        $sortDirection = $this->defaultSortDirection;
+        if (!empty($filters['sort_by'])) {
+            $parts = explode('_', $filters['sort_by']);
+            if (count($parts) === 2) {
+                [$field, $dir] = $parts;
+                $dir = strtoupper($dir);
+                if (in_array($field, $this->allowedSortFields) && in_array($dir, ['ASC', 'DESC'])) {
+                    $sortField = $field;
+                    $sortDirection = $dir;
+                }
+            }
+        }
+        $query .= " ORDER BY {$sortField} {$sortDirection}";
+
+        // Pagination
+        $limit = isset($filters['limit']) ? (int)$filters['limit'] : 10;
+        $offset = isset($filters['offset']) ? (int)$filters['offset'] : 0;
+        $query .= " LIMIT {$limit} OFFSET {$offset}";
+
+        return $this->fetchAll($query, $params);
+    }
+}
