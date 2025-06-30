@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Jun 29, 2025 at 11:56 PM
+-- Generation Time: Jun 30, 2025 at 04:39 AM
 -- Server version: 9.1.0
--- PHP Version: 8.3.14
+-- PHP Version: 8.4.0
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -79,11 +79,11 @@ INSERT INTO `seragam` (`id`, `nama`, `harga`, `harga_tambahan`, `berhijab`, `har
 (6, 'Bahan celana jas bawah ( hitam )', 119000, 9600, 0, 0, 6),
 (7, 'Bahan Executive jurusan', 314000, 10500, 0, 0, 7),
 (8, 'Bahan Pramuka Bawah (coklat tua)', 124000, 9900, 0, 0, 3),
-(9, 'Kaos Olah Raga', 132000, 0, 0, 0, 9),
+(9, 'Kaos Olah Raga', 132000, 0, 0, 0, 8),
 (10, 'Kerudung', 234000, 78000, 0, 0, 10),
 (11, 'Kaos Kaki', 28000, 0, 0, 0, 11),
 (12, 'Pakaian Lab. ( Farmasi )', 148000, 0, 0, 0, 12),
-(15, 'Atribut', 122000, 0, 0, 0, 8);
+(15, 'Atribut', 122000, 0, 0, 0, 9);
 
 -- --------------------------------------------------------
 
@@ -106,7 +106,7 @@ CREATE TABLE IF NOT EXISTS `siswa` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `no_pendaftaran` (`no_pendaftaran`),
   UNIQUE KEY `nis` (`nis`)
-) ENGINE=MyISAM AUTO_INCREMENT=431 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=432 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `siswa`
@@ -224,7 +224,7 @@ CREATE TABLE IF NOT EXISTS `transaksi` (
   UNIQUE KEY `kode_transaksi` (`kode_transaksi`),
   KEY `kasir_id` (`kasir_id`),
   KEY `siswa_id` (`siswa_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `transaksi`
@@ -236,7 +236,11 @@ INSERT INTO `transaksi` (`id`, `kode_transaksi`, `tanggal_transaksi`, `kasir_id`
 (3, 'TRX-1750944052', '2025-06-26 13:20:52', 1, 367, 'cash', 1864000, NULL, 'lunas', NULL, '2025-06-26 13:20:52', '2025-06-28 04:21:17'),
 (4, 'TRX-1751163390', '2025-06-29 02:16:30', 27, 348, 'cash', 1922000, NULL, 'batal', NULL, '2025-06-29 02:16:30', '2025-06-29 07:05:24'),
 (5, 'TRX-1751170283', '2025-06-29 04:11:23', 20, 398, 'cash', 1986000, NULL, 'diambil', NULL, '2025-06-29 04:11:23', '2025-06-29 07:46:52'),
-(6, 'TRX-1751174221', '2025-06-29 05:17:01', 20, 411, 'cash', 1986000, NULL, 'batal', NULL, '2025-06-29 05:17:01', '2025-06-29 07:05:20');
+(6, 'TRX-1751174221', '2025-06-29 05:17:01', 20, 411, 'cash', 1986000, NULL, 'batal', NULL, '2025-06-29 05:17:01', '2025-06-29 07:05:20'),
+(7, 'TRX-1751244264', '2025-06-30 00:44:24', 1, 398, 'cash', 132000, NULL, 'lunas', NULL, '2025-06-30 00:44:24', '2025-06-30 00:44:24'),
+(8, 'TRX-1751244358', '2025-06-30 00:45:58', 1, 364, 'cash', 122000, NULL, 'lunas', NULL, '2025-06-30 00:45:58', '2025-06-30 00:45:58'),
+(9, 'TRX-1751244418', '2025-06-30 00:46:58', 20, 405, 'cash', 146000, NULL, 'lunas', NULL, '2025-06-30 00:46:58', '2025-06-30 00:46:58'),
+(10, 'TRX-1751244450', '2025-06-30 00:47:30', 29, 397, 'cash', 270000, NULL, 'lunas', NULL, '2025-06-30 00:47:30', '2025-06-30 00:47:30');
 
 -- --------------------------------------------------------
 
@@ -256,7 +260,7 @@ CREATE TABLE IF NOT EXISTS `transaksi_detail` (
   PRIMARY KEY (`id`),
   KEY `transaksi_id` (`transaksi_id`),
   KEY `seragam_id` (`seragam_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=67 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=72 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `transaksi_detail`
@@ -328,7 +332,12 @@ INSERT INTO `transaksi_detail` (`id`, `transaksi_id`, `seragam_id`, `ukuran`, `b
 (63, 6, 9, 'standar', 0, 132000, 'diambil'),
 (64, 6, 10, 'standar', 0, 234000, 'diambil'),
 (65, 6, 11, 'standar', 0, 28000, 'diambil'),
-(66, 6, 12, 'standar', 0, 148000, 'diambil');
+(66, 6, 12, 'standar', 0, 148000, 'diambil'),
+(67, 7, 9, 'standar', 0, 132000, 'belum'),
+(68, 8, 15, 'standar', 0, 122000, 'belum'),
+(69, 9, 5, 'standar', 0, 146000, 'belum'),
+(70, 10, 3, 'standar', 0, 146000, 'belum'),
+(71, 10, 8, 'standar', 0, 124000, 'belum');
 
 -- --------------------------------------------------------
 
@@ -351,18 +360,131 @@ CREATE TABLE IF NOT EXISTS `users` (
   `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   UNIQUE KEY `username` (`username`)
-) ENGINE=MyISAM AUTO_INCREMENT=30 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=257 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `users`
 --
 
 INSERT INTO `users` (`id`, `username`, `password`, `nama`, `role`, `last_login`, `last_ip`, `login_attempts`, `locked_until`, `created_at`, `updated_at`) VALUES
-(1, 'admin', '$2y$10$GAX0CMhimQrMNnTtwZhrNu46PXw//7BFArzQGyZP4vFI3j8HxOaLW', 'Willy', 'admin', '2025-06-29 02:39:25', '::1', 0, NULL, '2025-03-18 20:30:53', '2025-06-29 02:39:25'),
-(29, 'Asri', '$2y$10$kB/B8Mh15xZfat46gWBnKOM86q2hOLYmUa410byk1ZBdiUDXjsMDC', 'Asri', 'kasir', NULL, NULL, 0, NULL, '2025-06-29 04:55:35', '2025-06-29 04:55:35'),
-(17, 'gudang', '$2y$10$yaOqHLuGNygj1tNM71ExLus69zwCFZMAdEGEeDGfBIrGRVHftFD1W', 'Dirwan', 'gudang', '2025-06-29 02:23:07', '::1', 0, NULL, '2025-03-19 19:49:04', '2025-06-29 02:23:07'),
-(20, 'kasir', '$2y$10$.RfH5Ix1uph7VwgQjfFTg.Fn7RvEQfkQNWZOHBdkEhF5siUpyBLA6', 'Jundi', 'kasir', '2025-06-29 03:02:06', '::1', 0, NULL, '2025-04-10 20:30:25', '2025-06-29 03:02:06'),
-(27, 'adi', '$2y$10$79E2bex1WB81L.iX2qbBse22zgSal5I8O2AGa4JRULTDEdiCXpGWq', 'Adi Irianto', 'kasir', '2025-06-29 02:15:16', '::1', 0, NULL, '2025-04-27 08:28:03', '2025-06-29 02:15:16');
+(1, 'admin', '$2y$10$GAX0CMhimQrMNnTtwZhrNu46PXw//7BFArzQGyZP4vFI3j8HxOaLW', 'Willy', 'admin', '2025-06-30 02:16:43', '::1', 0, NULL, '2025-03-18 20:30:53', '2025-06-30 02:16:43'),
+(29, 'Asri', '$2y$10$kB/B8Mh15xZfat46gWBnKOM86q2hOLYmUa410byk1ZBdiUDXjsMDC', 'Asri', 'kasir', '2025-06-30 00:47:15', '::1', 0, NULL, '2025-06-29 04:55:35', '2025-06-30 00:47:15'),
+(17, 'Dirwan', '$2y$10$yaOqHLuGNygj1tNM71ExLus69zwCFZMAdEGEeDGfBIrGRVHftFD1W', 'Dirwan', 'gudang', '2025-06-30 02:22:38', '::1', 0, NULL, '2025-03-19 19:49:04', '2025-06-30 02:22:38'),
+(20, 'kasir', '$2y$10$.RfH5Ix1uph7VwgQjfFTg.Fn7RvEQfkQNWZOHBdkEhF5siUpyBLA6', 'Jundi', 'kasir', '2025-06-30 00:46:31', '::1', 0, NULL, '2025-04-10 20:30:25', '2025-06-30 00:46:31'),
+(27, 'Adi', '$2y$12$F4lCYp3EonTJMofpdQ1Q5..NH/IAjzjX99qih4KUwcXZ9BD7feVH.', 'Adi Irianto', 'kasir', '2025-06-29 02:15:16', '::1', 0, NULL, '2025-04-27 08:28:03', '2025-06-30 02:21:52'),
+(237, 'MuhammadJundi', '$2y$12$i/lPzbhbcMutXKREYbvNVOTGjwNnvsdpc6lRMGoIDux/NAgN6NvYi', 'Muhammad Jundi Hanif', 'admin', '2025-06-30 02:18:33', '::1', 0, NULL, '2025-06-30 02:13:39', '2025-06-30 02:18:33'),
+(236, 'YogaWilly', '$2y$12$.LRbPWNGhxbJFJBsX8h9D.5/tzgKBtnoRheOqTdEjypwuUDWDkbXW', 'Yoga Willy Utomo', 'admin', NULL, NULL, 0, NULL, '2025-06-30 02:13:39', '2025-06-30 02:13:39'),
+(235, 'Eva', '$2y$12$drntZVzBya90qFIJuloI1eGu5iaahveIEw0Pd0Ka9wFO9e2K5uKSi', 'Eva Nurvaizah', 'kasir', NULL, NULL, 0, NULL, '2025-06-30 02:13:38', '2025-06-30 02:13:38'),
+(234, 'Hanif', '$2y$12$EsWpKwpsMTeXao0PtoqWMOSWFQ4LYtmtmmwBwsDtY0jarEpxIbwQa', 'Hanif Saeful Amin', 'kasir', NULL, NULL, 0, NULL, '2025-06-30 02:13:38', '2025-06-30 02:13:38'),
+(233, 'Sukarno', '$2y$12$owLSTQr8rOEa5MSfCobCH..Y8VTTfRu8gyo8ChYZ/FE3fs7k7VyjG', 'Sukarno', 'kasir', NULL, NULL, 0, NULL, '2025-06-30 02:13:37', '2025-06-30 02:13:37'),
+(232, 'Yuliati', '$2y$12$4X0Z1w7FriiTmncUJgAzbOSALDucQM0Ia92/3BkK8nR4xfn94wyiC', 'Yuliati', 'kasir', NULL, NULL, 0, NULL, '2025-06-30 02:13:37', '2025-06-30 02:13:37'),
+(231, 'Suwondo', '$2y$12$kKmV5R/L/YIzCVmSVlXAfOZyKbGIf6Uf.Ml0HXLjTuodtnH1dF.9C', 'Suwondo', 'kasir', NULL, NULL, 0, NULL, '2025-06-30 02:13:37', '2025-06-30 02:13:37'),
+(230, 'TriPuji', '$2y$12$AC5mb4E.tcm/ZnWmcUeXquN8JXYP/Z6ZFu7HuiC06xJKZo3drTqGi', 'Tri Puji Astuti', 'kasir', NULL, NULL, 0, NULL, '2025-06-30 02:13:36', '2025-06-30 02:13:36'),
+(229, 'Teguh', '$2y$12$HNFM6mszaV5K1L1HXnT4LO94kkuUmAHGBQwgG4x.YBiFY4ktWktaG', 'Teguh Wibowo', 'admin', NULL, NULL, 0, NULL, '2025-06-30 02:13:36', '2025-06-30 02:13:36'),
+(228, 'Singgih', '$2y$12$qACEiQ40QzE1zTN.uEgnSOgbXS8vSGsEDz2mScQJx2VLxyHXft67S', 'Singgih Yoga Putranto', 'kasir', NULL, NULL, 0, NULL, '2025-06-30 02:13:35', '2025-06-30 02:13:35'),
+(227, 'Roman', '$2y$12$SbVxTldLEwDnI4PZeosL5e6tMbdMhlNyFf3fDvunny/8MzXP9QOdq', 'Roman Boby Pradita', 'kasir', NULL, NULL, 0, NULL, '2025-06-30 02:13:35', '2025-06-30 02:13:35'),
+(226, 'Sugeng', '$2y$12$Ng9Il.d1K8pUfUtzphz0zeAtA4OThhVdijcCsl8UCMUmrFr0yYNgK', 'Sugeng Paryanto', 'kasir', NULL, NULL, 0, NULL, '2025-06-30 02:13:35', '2025-06-30 02:13:35'),
+(225, 'Gunawan', '$2y$12$uXe65lR/TUE6xpYnKX8jv.xqeOnhqvIkQG.dyaAScO6bQfCkcvmIS', 'Gunawan', 'kasir', NULL, NULL, 0, NULL, '2025-06-30 02:13:34', '2025-06-30 02:13:34'),
+(224, 'Priyanto', '$2y$12$3GcW26aqN.o/tHZbsPHpUOncQdxjNXXJvVNJtYZ/H82VPBeonq6fu', 'Priyanto', 'kasir', NULL, NULL, 0, NULL, '2025-06-30 02:13:34', '2025-06-30 02:13:34'),
+(223, 'Achmad', '$2y$12$H8rqDkgIx/7kKoRcXncCeev4sCXIU7FaF2ZIJs9deX4OndeycV4AW', 'Achmad Purtama Andana', 'kasir', NULL, NULL, 0, NULL, '2025-06-30 02:13:33', '2025-06-30 02:13:33'),
+(222, 'Sumiati', '$2y$12$Mq0g6TcCMLkomyL5c2krruu4tJikix5BKqaMo.g5p5OpmBnnM5J02', 'Sumiati', 'kasir', NULL, NULL, 0, NULL, '2025-06-30 02:13:33', '2025-06-30 02:13:33'),
+(221, 'Okkie', '$2y$12$JptnOhHR/3Ju3Tgezng2MeXxfvU7.lzaL8DVqeibDesiiSebv72ay', 'Okkie Cahya Milana', 'kasir', NULL, NULL, 0, NULL, '2025-06-30 02:13:32', '2025-06-30 02:13:32'),
+(220, 'Arief', '$2y$12$kkSolGW4Zdm2QfRLweOQLuWp/wHdwY7dkA0THo1Q0rQRJ..ahkITe', 'Arief Ritade Aswas', 'kasir', NULL, NULL, 0, NULL, '2025-06-30 02:13:32', '2025-06-30 02:13:32'),
+(219, 'Sholihah', '$2y$12$dse9xL1FDc3/VEbPN3YZVuB6HF8u0TnhjMhn3nsfNBHYoVsdiLZeK', 'Sholihah Husnul Chotimah', 'kasir', NULL, NULL, 0, NULL, '2025-06-30 02:13:32', '2025-06-30 02:13:32'),
+(218, 'Jamalusurur', '$2y$12$rrsFzzldM3M1VXr50GjkEe9YukkKymLOldhp6fqHnR5tl9orz7N4G', 'Jamalusurur', 'kasir', NULL, NULL, 0, NULL, '2025-06-30 02:13:31', '2025-06-30 02:13:31'),
+(217, 'Rowita', '$2y$12$9j71V7Wb9tB9pytYmFzi7.OEyPyBMuBDMAs9SNaCABQMMZ5IWzQn6', 'Rowita Arifia', 'kasir', NULL, NULL, 0, NULL, '2025-06-30 02:13:31', '2025-06-30 02:13:31'),
+(216, 'Indwi', '$2y$12$MMS99JQbRWK8hrgrIUORIuJ1dp6jXjCYn92aNF4dUv4n/c08H9G8i', 'Indwi Kurniati', 'kasir', NULL, NULL, 0, NULL, '2025-06-30 02:13:30', '2025-06-30 02:13:30'),
+(215, 'Arif', '$2y$12$KJS2CkiQUnfqYg67o7r09.L5H22bq1xRUEYRelCAfgRv6sU2xNodq', 'Arif Danang Prianggono', 'kasir', NULL, NULL, 0, NULL, '2025-06-30 02:13:30', '2025-06-30 02:13:30'),
+(214, 'Farida', '$2y$12$LMlc/9FztbBwtKyjWAe7B.roULD6JZaiAy614/gPGSMfYbWBao0Vm', 'Farida Kurniati', 'kasir', NULL, NULL, 0, NULL, '2025-06-30 02:13:29', '2025-06-30 02:13:29'),
+(213, 'Raras', '$2y$12$Xff5mZolrQF8qOi8QIxG1e5BiNf1NhSL54muk.TOuefM1Ufd3j99q', 'Raras Nuring Sasongkowati', 'kasir', NULL, NULL, 0, NULL, '2025-06-30 02:13:29', '2025-06-30 02:13:29'),
+(212, 'Menik', '$2y$12$wS9IzI0aMhV9f6EdZS0v2uhxiwpskRCtH1PJpDD/IDkLpjGBTCrhC', 'Menik Mugiwati', 'kasir', NULL, NULL, 0, NULL, '2025-06-30 02:13:29', '2025-06-30 02:13:29'),
+(211, 'Tutut', '$2y$12$B0MlHcE/iH6aLwJ9gL3AHOUT4mJjvAAM72GCpBuXIsGXMMaaU9aYu', 'Tutut Sinarsih', 'kasir', NULL, NULL, 0, NULL, '2025-06-30 02:13:28', '2025-06-30 02:13:28'),
+(210, 'Yoyok', '$2y$12$Ma5ejY7N5GDqVbPf7uPp3.8gG/RSPdo82rBaWM4Il6lL1Cgk84M4.', 'Yoyok Kushandoyo Gatot Budi S', 'kasir', NULL, NULL, 0, NULL, '2025-06-30 02:13:28', '2025-06-30 02:13:28'),
+(209, 'Naelussyfa', '$2y$12$Ss2EixwJsyzISf1ybZH8lOMfuTeu2aoeJPhNcbri7FVnUUVde2eDS', 'Naelussyfa Rohana', 'kasir', NULL, NULL, 0, NULL, '2025-06-30 02:13:27', '2025-06-30 02:13:27'),
+(208, 'Sulis', '$2y$12$l4EV3bV1K7cPb.D.5x1Hre4b5u18ykukvNBh.PTVJ/9EfKHuyi40q', 'Sulis Haryati', 'kasir', NULL, NULL, 0, NULL, '2025-06-30 02:13:27', '2025-06-30 02:13:27'),
+(207, 'SriMaryani', '$2y$12$dGLUGGNMLB4fMHzv7NHrB.llh..lLH5p16HRJGIKa0KDUOLBYWjUG', 'Sri Maryani', 'kasir', NULL, NULL, 0, NULL, '2025-06-30 02:13:26', '2025-06-30 02:13:26'),
+(206, 'Rosiatuningsih', '$2y$12$iOozC4Ig9HsV0tOGISooOuhEZIRpRug.u1dlj.4jBw7ozLJxu4n2i', 'Rosiatuningsih', 'kasir', NULL, NULL, 0, NULL, '2025-06-30 02:13:26', '2025-06-30 02:13:26'),
+(205, 'DwiAndi', '$2y$12$elKwF.ZA0evL85YVvzbVsOsX4fmXTzFOg5JcR.1a.uUgWiJRzDtj.', 'Dwi Andi Purnomo', 'admin', NULL, NULL, 0, NULL, '2025-06-30 02:13:26', '2025-06-30 02:13:26'),
+(204, 'Eko', '$2y$12$kezDUY8TOZqy8uDRyjxA1uecn3MGNIfWT7nKD4FqFXDL56cgjZgW.', 'Eko Budi Setiyanto', 'kasir', NULL, NULL, 0, NULL, '2025-06-30 02:13:25', '2025-06-30 02:13:25'),
+(203, 'Nurfaedah', '$2y$12$sLYzugjbABlquJX96Ic8j.La2.Kas7EzI5xz/bgACFToq6B0WiE36', 'Nurfaedah', 'kasir', NULL, NULL, 0, NULL, '2025-06-30 02:13:25', '2025-06-30 02:13:25'),
+(202, 'Akhmad', '$2y$12$fU3Wy03jCtff.Hl25BLc3.aIxD9lCxRbzh9wnG./vZbMfmyOxpJp6', 'Akhmad Syauqy', 'kasir', NULL, NULL, 0, NULL, '2025-06-30 02:13:24', '2025-06-30 02:13:24'),
+(201, 'Kustinah', '$2y$12$IeKsgZkiQR7/Wdrcv8XNL.UkEs/lNo60UTaddKQ7BFTlQoamlmsdu', 'Kustinah', 'kasir', NULL, NULL, 0, NULL, '2025-06-30 02:13:24', '2025-06-30 02:13:24'),
+(200, 'Budhi', '$2y$12$sUTwlV/EhWb4Nkpg/zHX3uysEUIvwrry5QcWIYqvJpE1SkLCP7OPO', 'Budhi Cahyono', 'kasir', NULL, NULL, 0, NULL, '2025-06-30 02:13:23', '2025-06-30 02:13:23'),
+(199, 'Rustri', '$2y$12$nSZJ6mSJodEYsfEZTy6hte9.jIeymqsjNghJQzTHDc5ag3VgioZ9G', 'Rustri Sulistiyaningsih', 'kasir', NULL, NULL, 0, NULL, '2025-06-30 02:13:23', '2025-06-30 02:13:23'),
+(198, 'Angga', '$2y$12$aIKqHh1g6THhBGAhlZTYuunpvlNp7jX7mH7LPAZ1SZ7VTROKjNNJS', 'Angga Sukma Gilang', 'kasir', NULL, NULL, 0, NULL, '2025-06-30 02:13:23', '2025-06-30 02:13:23'),
+(197, 'Indah', '$2y$12$N86IG7XkD6yFiSXN0h7CyeUktP3X2FbamwSiBzZSgcbj.d28GZppC', 'Indah Saptanti', 'kasir', NULL, NULL, 0, NULL, '2025-06-30 02:13:22', '2025-06-30 02:13:22'),
+(196, 'Yusuf', '$2y$12$9TMStYmDZxsuf7QmFna9eO7PUVbxRpHMJaO3MAFJOK7l8S.ASxfya', 'Yusuf Achmadi', 'kasir', NULL, NULL, 0, NULL, '2025-06-30 02:13:22', '2025-06-30 02:13:22'),
+(195, 'TriRahyuningsih', '$2y$12$9uIOEUxv9I/.rabAoynNCeMSWRd64r/MUr9Ei.6jyFy52YElMOElu', 'Tri Rahyuningsih', 'kasir', NULL, NULL, 0, NULL, '2025-06-30 02:13:21', '2025-06-30 02:13:21'),
+(194, 'Sukirman', '$2y$12$X4e4arUdl/1QKFap2uTuCOonuMX4b3VLKCdH3cT8699J0E3wCvLay', 'Sukirman', 'kasir', NULL, NULL, 0, NULL, '2025-06-30 02:13:21', '2025-06-30 02:13:21'),
+(193, 'Widiastuti', '$2y$12$B0zf1LZQDS9VZyw4KjMBuOs1c43y.aVp/HlyYL.78dAclnVc2BL4.', 'Widiastuti S', 'kasir', NULL, NULL, 0, NULL, '2025-06-30 02:13:20', '2025-06-30 02:13:20'),
+(192, 'Faradina', '$2y$12$ZYFDbOxxfTp/uPo3U4s8c.9yGFX5mD5vuTJYARHLzaI2niRHTEuY2', 'Faradina', 'kasir', NULL, NULL, 0, NULL, '2025-06-30 02:13:20', '2025-06-30 02:13:20'),
+(191, 'Sudijat', '$2y$12$.0dxZct3P6EhlaOgDDpMouJjKEwCjp8.5nTYcWzqdUpGY5tl2mBGa', 'Sudijat', 'kasir', NULL, NULL, 0, NULL, '2025-06-30 02:13:20', '2025-06-30 02:13:20'),
+(190, 'Ayu', '$2y$12$haR0DfVCAqk9fsWWPnqnH.Yh.4jfAoiVEGmvBovDgQP2KyuiUqFxG', 'Ayu Swandini', 'kasir', NULL, NULL, 0, NULL, '2025-06-30 02:13:19', '2025-06-30 02:13:19'),
+(189, 'Uthiya', '$2y$12$ZvaEeEbgo2XOI69.r/t1V.AE08TXh36prvid6PZ4uoFPyLS89ECQ6', 'Uthiya Rahma', 'kasir', NULL, NULL, 0, NULL, '2025-06-30 02:13:19', '2025-06-30 02:13:19'),
+(188, 'NurHepti', '$2y$12$zeH2Be4/eicDuTfLOhGff.T2XiCI9gQBdseX1XvPUorlKbJS/QMfG', 'Nur Hepti Istiqomah', 'kasir', NULL, NULL, 0, NULL, '2025-06-30 02:13:18', '2025-06-30 02:13:18'),
+(187, 'Tanton', '$2y$12$5DFotQyVAfbtQYHZQ0HoeembetIEq2N0aZlHBCyW5Bx/InF6/VOam', 'Tanton Cahyanto', 'kasir', NULL, NULL, 0, NULL, '2025-06-30 02:13:18', '2025-06-30 02:13:18'),
+(186, 'TitiEndri', '$2y$12$577cyMCUw4oXE8U0limYY.Zr6uWymhkvGkckdr7FYfUM8QsAdb1x6', 'Titi Endri Astuti', 'kasir', NULL, NULL, 0, NULL, '2025-06-30 02:13:17', '2025-06-30 02:13:17'),
+(185, 'Hayu', '$2y$12$h1H6Nm4R2Sz1Y.myV17.CeMETd7cPqinwa61VprQ.CzlIIBhsj39e', 'Hayu Almar\'atus Sholihah', 'kasir', NULL, NULL, 0, NULL, '2025-06-30 02:13:17', '2025-06-30 02:13:17'),
+(184, 'Ratsongko', '$2y$12$GgGH7KZE2eFUFzvO3m/Jr.kG.Ie7KsAQu/PYoSHeIogU6vi4rCHjy', 'Ratsongko Mawi Tantri', 'kasir', NULL, NULL, 0, NULL, '2025-06-30 02:13:17', '2025-06-30 02:13:17'),
+(183, 'Cahyono', '$2y$12$EEy4Iy5nEz9iTPP5mY9mIuKo4TDec21I9A.kdnAYUtql7C1xfy3KW', 'Tri Cahyono', 'kasir', NULL, NULL, 0, NULL, '2025-06-30 02:13:16', '2025-06-30 02:13:16'),
+(182, 'Fajri', '$2y$12$GWJMbLWrAgV5Wv7L/MSQiebmmpEi7ACJylRbtcdShaufSakn4hMKC', 'Fajri Tri Khoiriyatun', 'kasir', NULL, NULL, 0, NULL, '2025-06-30 02:13:16', '2025-06-30 02:13:16'),
+(181, 'Afridian', '$2y$12$dkqiFMWd63AhOIla31C90.LzXkpXl53BmmY//IM8PQMxRxKwoJ3gy', 'Afridian', 'kasir', NULL, NULL, 0, NULL, '2025-06-30 02:13:15', '2025-06-30 02:13:15'),
+(180, 'Sofwan', '$2y$12$.ia53PF/E.77ge0OvuAKTu1BZDJiYA74D8SZBaiFsnCYUVnLAtgP.', 'Sofwan Akhmad', 'kasir', NULL, NULL, 0, NULL, '2025-06-30 02:13:15', '2025-06-30 02:13:15'),
+(179, 'TitiErnawati', '$2y$12$GVYGDDXLih4LNiJ9ZGD2j.xWr4i4q8ajmji0788t7m9OY0e3ZuNXm', 'Titi Ernawati', 'kasir', NULL, NULL, 0, NULL, '2025-06-30 02:13:14', '2025-06-30 02:13:14'),
+(178, 'Agus', '$2y$12$KX1dLgNf080YOTd1k0x3WOXUb7zL8v9nxOXG7C.mDmflQTzGExTB6', 'Agus Nuryanto', 'kasir', NULL, NULL, 0, NULL, '2025-06-30 02:13:14', '2025-06-30 02:13:14'),
+(177, 'Kikie', '$2y$12$fjqIyibEuGJ57LcceTBSreMD6v0VefRsAKj2127tmcoV0DKixlCwy', 'Kikie Astri Mahdalika', 'kasir', NULL, NULL, 0, NULL, '2025-06-30 02:13:14', '2025-06-30 02:13:14'),
+(176, 'Muji', '$2y$12$.gBXF1njlTRu2eixsA/Jxep1t7EqDqpaw1.IJC9yImAUaWJPFuqbK', 'Muji Lestari', 'kasir', NULL, NULL, 0, NULL, '2025-06-30 02:13:13', '2025-06-30 02:13:13'),
+(175, 'Fajriatun', '$2y$12$tiODyI2F.80qG5bHB9rOEehwqI59tn0eoCQoWi3pRptwpGoXf3Xue', 'Dwi Prastanti Fajriatun', 'kasir', NULL, NULL, 0, NULL, '2025-06-30 02:13:13', '2025-06-30 02:13:13'),
+(174, 'Haryono', '$2y$12$1xX5w6VXSphpioMGF6pRf.N0mSF0BPE3wOT2AnxISYPkBUo.OzWUS', 'Haryono', 'kasir', NULL, NULL, 0, NULL, '2025-06-30 02:13:12', '2025-06-30 02:13:12'),
+(173, 'Roslina', '$2y$12$43UIx76DFF7UdHguZqsM/OMzI1q9UjQZboB3Uex4qSifvirWWwaL.', 'Roslina Saptaningrum', 'kasir', NULL, NULL, 0, NULL, '2025-06-30 02:13:12', '2025-06-30 02:13:12'),
+(172, 'Dani', '$2y$12$WG0ZKE2jIlxbQNkDJPoh8.KW/TZNtcYGMW7FG4KhJz9zUQHUorsGS', 'M. Dani Ismail', 'kasir', NULL, NULL, 0, NULL, '2025-06-30 02:13:11', '2025-06-30 02:13:11'),
+(171, 'Maisatul', '$2y$12$RYFxVWNTBo4doq7bccfjn.WL/Ilb2zeJw7J/5i/ZCg53dPWkX4zmu', 'Maisatul Rochmah', 'kasir', NULL, NULL, 0, NULL, '2025-06-30 02:13:11', '2025-06-30 02:13:11'),
+(170, 'Palupi', '$2y$12$piZIdQTNYXJovDXSawf4vuMkHiZpP/Z7oq6yhIz/FCY3wo5irJNoS', 'Palupi Nilasari', 'kasir', NULL, NULL, 0, NULL, '2025-06-30 02:13:10', '2025-06-30 02:13:10'),
+(169, 'Riyad', '$2y$12$/Zm4oX0GVw79VWfu/ITywOVo9C.VxlPRfKXqht.VCq7FU8UB/jpuC', 'Riyad Firdausi', 'kasir', NULL, NULL, 0, NULL, '2025-06-30 02:13:10', '2025-06-30 02:13:10'),
+(168, 'Nurul', '$2y$12$Nwn3K2Mbny7NhS7ebESNGe6CEt3dvgegK3sEcjidak0fdUzDoIP4m', 'Nurul Chasanah', 'kasir', NULL, NULL, 0, NULL, '2025-06-30 02:13:09', '2025-06-30 02:13:09'),
+(167, 'Rumili', '$2y$12$CRokEzKJGzUnUmfGHUPU5.eQjwvn/thlS7KJaYxdm1zZnbixsntbC', 'Rumili', 'kasir', NULL, NULL, 0, NULL, '2025-06-30 02:13:09', '2025-06-30 02:13:09'),
+(166, 'Tati', '$2y$12$vAHBc85CCV3qX2XB0FLqGu8ylsaRr3gc5JX813AWvpywFHgfm.7gW', 'Tati Nurhayati', 'kasir', NULL, NULL, 0, NULL, '2025-06-30 02:13:08', '2025-06-30 02:13:08'),
+(165, 'Nasiyah', '$2y$12$nIpMWwCchNXEH7rHglNwtOPJlidw6jURb5nUEl5paOh98GRfI1oCe', 'Nasiyah', 'kasir', NULL, NULL, 0, NULL, '2025-06-30 02:13:08', '2025-06-30 02:13:08'),
+(164, 'Amalinda', '$2y$12$Cx3YbqQMLXA/0ga2rccDaO04MRTrS1.KW0T.VKzgAag2wvO.O/50W', 'Amalinda Hergiawati', 'kasir', NULL, NULL, 0, NULL, '2025-06-30 02:13:08', '2025-06-30 02:13:08'),
+(163, 'Meliza', '$2y$12$r2LfkKJmKzjdJ0DqRvxnNekVW8QBmKkpaIj7BhbuLgvRuvaj5RN22', 'Meliza Dyah Puspitasari', 'kasir', NULL, NULL, 0, NULL, '2025-06-30 02:13:07', '2025-06-30 02:13:07'),
+(162, 'Musyaffa', '$2y$12$bT2D3y6NpDOz9L7TkjG5pO2iTGQC03YRgblybHMODaI6aqsmsBZ2e', 'Muhammad Musyaffa', 'kasir', NULL, NULL, 0, NULL, '2025-06-30 02:13:07', '2025-06-30 02:13:07'),
+(161, 'Lina', '$2y$12$IC7ozKufT7rpGIiq89XRfOMnGiD2rBSfKMivqa4ZOAF9gy6HsSPN.', 'Lina Nuryanti', 'kasir', NULL, NULL, 0, NULL, '2025-06-30 02:13:06', '2025-06-30 02:13:06'),
+(160, 'Rohmat', '$2y$12$R0jO0d5IzBWZrDvx48ZMA.p4TlWuQU64a9f9GElLuzmnYDhrYipbi', 'Rohmat Prayogi', 'kasir', NULL, NULL, 0, NULL, '2025-06-30 02:13:06', '2025-06-30 02:13:06'),
+(159, 'Sugiarti', '$2y$12$z9Nfsj0TJPKmW25Rqp6G1OSf93jytDjKjSJXKGmSTIdfzsKYaFeQ2', 'Sugiarti', 'kasir', NULL, NULL, 0, NULL, '2025-06-30 02:13:05', '2025-06-30 02:13:05'),
+(158, 'Soekristianti', '$2y$12$5CN.Yuf6HJEkLfL/FjjOUuCZsrnheNRn6A9Zf1qNO3JbFshKSY79i', 'Soekristianti Edi Siswati', 'kasir', NULL, NULL, 0, NULL, '2025-06-30 02:13:05', '2025-06-30 02:13:05'),
+(157, 'Andit', '$2y$12$.CIaDMept7pT7gw0O/2pguz/nIePwQm1VZqyKaiS3Fywb6l6vutbi', 'Andit Dwi Susanto', 'kasir', NULL, NULL, 0, NULL, '2025-06-30 02:13:05', '2025-06-30 02:13:05'),
+(156, 'Nining', '$2y$12$Q1XDxFTajjK.fNuf52696OK4eSfHPKNLEYelUiiok6wijR1lHGoT2', 'Nining Umiyati', 'kasir', NULL, NULL, 0, NULL, '2025-06-30 02:13:04', '2025-06-30 02:13:04'),
+(155, 'SriYulia', '$2y$12$1aLOoK/FMOKFaEQ9aM8nj./8wmuLCJzUYC4y1Hwj8TroGCyFseWCe', 'Sri Yulia Ningsih', 'kasir', NULL, NULL, 0, NULL, '2025-06-30 02:13:04', '2025-06-30 02:13:04'),
+(154, 'Fajar', '$2y$12$d.HAentxKI4isXX9DdsL9.LxgMAuNL0FQQNThIcGkdDAsJECfb8sC', 'Fajar Mintaraga', 'kasir', NULL, NULL, 0, NULL, '2025-06-30 02:13:03', '2025-06-30 02:13:03'),
+(153, 'Yunita', '$2y$12$QcgJC2Ve6IJ0.LPqkoVXAuDLRHZmGV0sk2aSr4VSMxmnXqPS13OS.', 'Yunita Sri Rahayu', 'kasir', NULL, NULL, 0, NULL, '2025-06-30 02:13:03', '2025-06-30 02:13:03'),
+(152, 'Feria', '$2y$12$OFQmQ9nrE7mqnkUMOvdnQuva3MbhFKVnrwI1aOhDKf8OQp7mhOhQG', 'Feria Faozah Susilowati', 'kasir', NULL, NULL, 0, NULL, '2025-06-30 02:13:03', '2025-06-30 02:13:03'),
+(151, 'Diyah', '$2y$12$PVpPHv.NIbSz/f/QJYx7cONv.d6WvpbXWXJWmDLTnTBv251Nl4MZG', 'Diyah Chandra Ikawati', 'kasir', NULL, NULL, 0, NULL, '2025-06-30 02:13:02', '2025-06-30 02:13:02'),
+(150, 'Karsono', '$2y$12$dcKWRQn6yaWdWbBlYt8U8.QPM1s5nTyY01UjS/68/sQ4TxLW6NBXm', 'Karsono', 'kasir', NULL, NULL, 0, NULL, '2025-06-30 02:13:02', '2025-06-30 02:13:02'),
+(149, 'Solikhah', '$2y$12$mImdMXPPXRtD3rWJ7lRCWOXXjSa1NcHbim2syCEaLs/kMh3xN5Rw6', 'Solikhah', 'kasir', NULL, NULL, 0, NULL, '2025-06-30 02:13:01', '2025-06-30 02:13:01'),
+(148, 'SriYulaeni', '$2y$12$rPeS42lbq.8bnQ5uNsjW4eK3wsLz6s2WANMspfX8a8j3B4edZM26S', 'Sri Yulaeni Susanti', 'kasir', NULL, NULL, 0, NULL, '2025-06-30 02:13:01', '2025-06-30 02:13:01'),
+(147, 'Eti', '$2y$12$2.3lz87E4gEGLsgWyJ2Jo.UW4VyJyRRNa7k2/5w7YezncUvviVZz2', 'Eti Umiyati', 'kasir', NULL, NULL, 0, NULL, '2025-06-30 02:13:00', '2025-06-30 02:13:00'),
+(146, 'Alifah', '$2y$12$r.yk38M/HDlV7r3Kr0hI2uHmfnyQtU3uldvlvvsSL5.fShIkIrwxS', 'Alifah Purnami', 'kasir', NULL, NULL, 0, NULL, '2025-06-30 02:13:00', '2025-06-30 02:13:00'),
+(145, 'Lili', '$2y$12$LWTPGnW.ykpUdVwiF/S3pOnSnr8IOVl2WgayfHBG8I5sIIbBevk.K', 'Lili Suprihatin', 'kasir', NULL, NULL, 0, NULL, '2025-06-30 02:13:00', '2025-06-30 02:13:00'),
+(144, 'Insan', '$2y$12$kA8wgmphGXTcMFy3SwZLW.XfolV5AeSTW4HSApTGsLOrfQoSQSafu', 'Insan', 'kasir', NULL, NULL, 0, NULL, '2025-06-30 02:12:59', '2025-06-30 02:12:59'),
+(238, 'Ingga', '$2y$12$K7P45d5nHsf73NziuIPD9uqi/108aRCRurCsdkbCfLsZxRqk3l66y', 'Ingga Rossi Rahmadani', 'kasir', NULL, NULL, 0, NULL, '2025-06-30 02:13:40', '2025-06-30 02:13:40'),
+(239, 'Kusyono', '$2y$12$AmHHibu1EH98hFfjT67/hODb92qTgf6KFIde5NCv9PwHFALOyPlP.', 'Kusyono Trihantoro', 'kasir', NULL, NULL, 0, NULL, '2025-06-30 02:13:40', '2025-06-30 02:13:40'),
+(240, 'Kurniawan', '$2y$12$IHvGqf.mgGRWuN0Kr0A0NeWnQunaFp5KnO52L83j0AVEC4RrzWzeq', 'Kurniawan Setiyadi', 'kasir', NULL, NULL, 0, NULL, '2025-06-30 02:13:41', '2025-06-30 02:13:41'),
+(241, 'Marita', '$2y$12$IYKrPTotWn0ieJFuTS1kGe12CSS/cEgz1LKfdnxGS/w61widYzdVO', 'Marita Budi Susilowati', 'kasir', NULL, NULL, 0, NULL, '2025-06-30 02:13:41', '2025-06-30 02:13:41'),
+(242, 'Anggita', '$2y$12$8gwtQ0EIlVUg09cLevNX1OdXbRNNmR7QiYMjInYyvuZDJ0CrFR2zK', 'Anggita Puspa Perdana', 'kasir', NULL, NULL, 0, NULL, '2025-06-30 02:13:41', '2025-06-30 02:13:41'),
+(243, 'Waluyo', '$2y$12$QYOrT081IslLSJInF14YgenaIGNeE0KdAGwdbW7agjgl3.wyuPS1u', 'Waluyo', 'kasir', NULL, NULL, 0, NULL, '2025-06-30 02:13:42', '2025-06-30 02:13:42'),
+(244, 'Imam', '$2y$12$nFK1seIJTXg32EJDO7xVeOs3aeR6blo//XuIwW55.CgBbAxfilhta', 'Imam Pudji Santosa', 'kasir', NULL, NULL, 0, NULL, '2025-06-30 02:13:42', '2025-06-30 02:13:42'),
+(245, 'Rosmiasih', '$2y$12$IcKs8uv0eYlTJ3QfqEr8.uBodVEsxd7TpsjUMhyltcAroHjyFA/5K', 'Rosmiasih', 'kasir', NULL, NULL, 0, NULL, '2025-06-30 02:13:43', '2025-06-30 02:13:43'),
+(246, 'Ratna', '$2y$12$55rgJxhKAnJSWRJ.Zmq7bef5w9aQ9qPz.Md/ux5d/mF51dKTn.tn6', 'Ratna Budi Susanti', 'kasir', NULL, NULL, 0, NULL, '2025-06-30 02:13:43', '2025-06-30 02:13:43'),
+(247, 'MuchamadAwaludin', '$2y$12$oK1D.H.1nLRkTBNE4Q89d.fBkhMTXKnLSM2/43ZRLGYlyGILVy1Ge', 'Muchamad Awaludin', 'kasir', NULL, NULL, 0, NULL, '2025-06-30 02:13:44', '2025-06-30 02:13:44'),
+(248, 'Seno', '$2y$12$coOwXkB0ODp/469YBZwOMuU2TAi0pbfnPgs7LcGTsxjaGKy2Ps5ZO', 'Seno Nugroho', 'kasir', NULL, NULL, 0, NULL, '2025-06-30 02:13:44', '2025-06-30 02:13:44'),
+(249, 'Asrining', '$2y$12$G.uanHp1.Ucl4I56ThLSBe7QHCBMPm.YQmWjrCHSc0QbF9gqbZSjG', 'Asrining Pratiwi', 'kasir', NULL, NULL, 0, NULL, '2025-06-30 02:13:44', '2025-06-30 02:13:44'),
+(250, 'Ichsan', '$2y$12$pWRcA8jsLb6OwIu8hIFrYOs3N9Hg95Gp7UQv6ERtOdmPt1GmPNm8S', 'Ichsan Romdhona', 'kasir', NULL, NULL, 0, NULL, '2025-06-30 02:13:45', '2025-06-30 02:13:45'),
+(251, 'Mardwityo', '$2y$12$7iBLIe6jdu6TAdeOeS3cRukUfuTyUcMLvMcQxHNk/Sku2/sp02xfO', 'Mardwityo Romadhona', 'kasir', NULL, NULL, 0, NULL, '2025-06-30 02:13:45', '2025-06-30 02:13:45'),
+(252, 'Kuwati', '$2y$12$MWtRxxc7r000BK3cjy07H.DIspL/MLr68VJ7e3r/c01DyNyprUKC2', 'Kuwati', 'kasir', NULL, NULL, 0, NULL, '2025-06-30 02:13:46', '2025-06-30 02:13:46'),
+(253, 'NurNgaini', '$2y$12$kHFQYmKI8PyPcUDqXYrdD.m29hHM0i/FKkQvTTcrp.sCNSpZHekvO', 'Nur Ngaini', 'kasir', NULL, NULL, 0, NULL, '2025-06-30 02:13:46', '2025-06-30 02:13:46'),
+(254, 'Rina', '$2y$12$2W4DKs.TgOdYcWwcfj2fA.1K2bVKj2WpB7NMpmSTqNHrvcFmjp8Ja', 'Rina Mulyani', 'kasir', NULL, NULL, 0, NULL, '2025-06-30 02:13:47', '2025-06-30 02:13:47'),
+(255, 'Abdul', '$2y$12$OLmfZlPrmZQS4o1e7IimnuAQoHt/FFieEe.gZYQyCQ7Q38NZUBpFy', 'Abdul Manan', 'kasir', NULL, NULL, 0, NULL, '2025-06-30 02:13:47', '2025-06-30 02:13:47'),
+(256, 'Titis', '$2y$12$m6K1oYOPdAsQIUn1BoqLKuraKh0z.o9SIewBDvUHwUnKf7rOC70Di', 'Titis Arum Ika YA', 'kasir', NULL, NULL, 0, NULL, '2025-06-30 02:13:47', '2025-06-30 02:13:47');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
