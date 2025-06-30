@@ -55,6 +55,17 @@
     <div class="d-flex justify-content-between align-items-center mb-3">
         <h2 class="mb-4">Manajemen Transaksi</h2>
         <div class="d-flex gap-2">
+            <?php if ($data['role'] === 'admin'): ?>
+                <div class="mb-3">
+                    <a
+                        id="btnTruncate"
+                        class="btn btn-danger"
+                        href="#"
+                        data-href="<?= BASEURL; ?>/transaksi/truncate">
+                        Truncate Transaksi
+                    </a>
+                </div>
+            <?php endif ?>
             <?php if ($data['role'] !== 'gudang'): ?>
                 <div class="mb-3">
                     <button class="btn btn-primary" data-toggle="modal" id="btnTambah" data-target="#modalTambahTransaksi"> <i class="bi bi-plus-circle"></i> Tambah Transaksi</button>
@@ -1247,5 +1258,27 @@
                 });
             });
 
+    });
+
+
+    document.getElementById('btnTruncate').addEventListener('click', function(e) {
+        e.preventDefault();
+        const url = this.dataset.href; // BASEURL/transaksi/truncate
+
+        Swal.fire({
+            title: 'Yakin ingin mengosongkan semua transaksi?',
+            text: 'Data transaksi (master & detail) akan hilang permanen!',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Ya, kosongkan!',
+            cancelButtonText: 'Batal',
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#3085d6'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // Jika user pilih Ya, redirect ke controller truncate
+                window.location.href = url;
+            }
+        });
     });
 </script>

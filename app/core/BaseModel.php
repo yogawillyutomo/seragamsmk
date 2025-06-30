@@ -295,4 +295,9 @@ abstract class BaseModel
 
         return $this->fetchAll($query, $params);
     }
+
+    protected function truncateTable(string $table): bool
+    {
+        return $this->run("TRUNCATE TABLE {$table}");
+    }
 }

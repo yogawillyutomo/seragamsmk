@@ -5,7 +5,7 @@ class Transaksi_model extends BaseModel
 {
 
     protected string $defaultTable = 'transaksi';
-
+    protected string $detailTable      = 'transaksi_detail';
 
     protected array $defaultSearchFields = ['s.nama', 'u.nama'];
     protected array $defaultExactFields = ['s.id'];
@@ -318,5 +318,21 @@ class Transaksi_model extends BaseModel
         $placeholders = implode(',', array_fill(0, count($ids), '?'));
         $this->db->query("UPDATE transaksi_detail SET status_ambil = ? WHERE id IN ($placeholders)");
         return $this->db->execute(array_merge([$status], $ids));
+    }
+
+    public function truncateTransaksi(): bool
+    {
+        $this->run("SET FOREIGN_KEY_CHECKS = 0");
+
+        $okDetail = $this->truncateTable($this->detailTable);
+        $okMaster = $this->truncateTable($this->defaultTable);
+
+        // Reset AUTO_INCREMENT (MySQL TRUNCATE biasanya sudah reset)
+        $this->run("ALTER TABLE {$this->detailTable} AUTO_INCREMENT = 1");
+        $this->run("ALTER TABLE {$this->defaultTable} AUTO_INCREMENT = 1");
+
+        $this->run("SET FOREIGN_KEY_CHECKS = 1");
+
+        return $okDetail && $okMaster;
     }
 }

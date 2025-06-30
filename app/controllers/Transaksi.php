@@ -288,4 +288,30 @@ class Transaksi extends Controller
             echo json_encode(['status' => 'error', 'message' => $e->getMessage()]);
         }
     }
+
+    /**
+     * Hapus semua data transaksi dan detailnya (hanya admin)
+     */
+    public function truncate()
+    {
+        if ($_SESSION['role'] !== 'admin') {
+            Flasher::setFlash('Akses ditolak', 'gagal', 'danger');
+            header('Location: ' . BASEURL . '/transaksi');
+            exit;
+        }
+
+        try {
+            $success = $this->transaksiModel->truncateTransaksi();
+            if ($success) {
+                Flasher::setFlash('Semua data transaksi berhasil dihapus dan AUTO_INCREMENT di-reset.', 'sukses', 'success');
+            } else {
+                Flasher::setFlash('Gagal mereset data transaksi. Coba lagi.', 'gagal', 'danger');
+            }
+        } catch (Exception $e) {
+            Flasher::setFlash('Error: ' . $e->getMessage(), 'gagal', 'danger');
+        }
+
+        header('Location: ' . BASEURL . '/transaksi');
+        exit;
+    }
 }
