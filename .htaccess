@@ -1,9 +1,15 @@
+# file: /seragam/.htaccess
 <IfModule mod_rewrite.c>
     RewriteEngine On
 
-    # Jika mengakses langsung root folder, arahkan ke public/
-    RewriteCond %{REQUEST_URI} !public/
+    # 1) Skip kalau URI sudah menuju ke public/
+    RewriteRule ^public/ - [L]
+
+    # 2) Skip kalau file/folder benar-benar ada di root
+    RewriteCond %{REQUEST_FILENAME} -f [OR]
+    RewriteCond %{REQUEST_FILENAME} -d
+    RewriteRule ^ - [L]
+
+    # 3) Otherwise redirect ke public/
     RewriteRule ^(.*)$ public/$1 [L]
 </IfModule>
-
-
