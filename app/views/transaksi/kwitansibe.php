@@ -104,6 +104,7 @@ $items = $data['items'];
 
         .tanda-tangan {
             text-align: right;
+            padding-bottom: 50px;
         }
 
         .tanda-tangan .petugas {
@@ -168,7 +169,7 @@ $items = $data['items'];
             <div class="tanda-tangan">
                 Purwokerto, <?= date('d-m-Y', strtotime($tx['tanggal_transaksi'])) ?><br>
                 Petugas,<br><br><br>
-                <span class="petugas"><?= htmlspecialchars($tx['kasir']) ?></span>
+
             </div>
         </div>
 
@@ -187,7 +188,7 @@ $items = $data['items'];
                     <div><strong>Guna Membayar:</strong> Seragam Sekolah</div>
                 </div>
                 <div class="col">
-         
+
                     <div><strong>NISN:</strong> <?= htmlspecialchars($tx['nis']) ?></div>
                     <div><strong>Jurusan:</strong> <?= htmlspecialchars($tx['jurusan']) ?></div>
                 </div>
@@ -203,7 +204,7 @@ $items = $data['items'];
             <div class="tanda-tangan">
                 Purwokerto, <?= date('d-m-Y', strtotime($tx['tanggal_transaksi'])) ?><br>
                 Petugas,<br><br><br>
-                <span class="petugas"><?= htmlspecialchars($tx['kasir']) ?></span>
+
             </div>
         </div>
 
