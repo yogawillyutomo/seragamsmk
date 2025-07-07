@@ -146,14 +146,19 @@ $items = $data['items'];
                 <thead>
                     <tr>
                         <th>Item</th>
-                        <th>Jenis</th>
+                        <th>Ukuran</th>
+                        <th>Berhijab</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <?php foreach ($items as $it): ?>
+                    <?php foreach ($items as $it):
+                        $ukuran = $it['ukuran'];
+                        if ($it['ukuran'] != "standar")  $ukuran = "custom (" . $it['ukuran'] . ")";
+                    ?>
                         <tr>
                             <td><?= htmlspecialchars($it['nama_seragam']) ?></td>
-                            <td><?= $it['berhijab'] ? 'Berhijab' : 'Beli' ?></td>
+                            <td><?= $ukuran ?></td>
+                            <td><?= $it['berhijab'] ? 'Berhijab' : 'Tidak' ?></td>
                         </tr>
                     <?php endforeach; ?>
                 </tbody>

@@ -222,7 +222,7 @@
                             </th>
                             <th>Nama Seragam</th>
                             <th>Ukuran</th>
-                            <th>Status</th>
+                            <th>Jenis</th>
                             <th>Subtotal</th>
                         </tr>
                     </thead>
@@ -499,6 +499,35 @@
                 }
             }
         });
+
+
+        const btnTruncate = document.getElementById('btnTruncate');
+
+        // Cek apakah elemen dengan id btnTruncate ada
+        if (btnTruncate) {
+            btnTruncate.addEventListener('click', function(e) {
+                e.preventDefault();
+                const url = this.dataset.href; // BASEURL/transaksi/truncate
+
+                Swal.fire({
+                    title: 'Yakin ingin mengosongkan semua transaksi?',
+                    text: 'Data transaksi (master & detail) akan hilang permanen!',
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonText: 'Ya, kosongkan!',
+                    cancelButtonText: 'Batal',
+                    confirmButtonColor: '#d33',
+                    cancelButtonColor: '#3085d6'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        // Jika user pilih Ya, redirect ke controller truncate
+                        window.location.href = url;
+                    }
+                });
+            });
+        } else {
+            console.warn('Tombol #btnTruncate tidak ditemukan di halaman.');
+        }
 
 
     });
@@ -1258,27 +1287,5 @@
                 });
             });
 
-    });
-
-
-    document.getElementById('btnTruncate').addEventListener('click', function(e) {
-        e.preventDefault();
-        const url = this.dataset.href; // BASEURL/transaksi/truncate
-
-        Swal.fire({
-            title: 'Yakin ingin mengosongkan semua transaksi?',
-            text: 'Data transaksi (master & detail) akan hilang permanen!',
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonText: 'Ya, kosongkan!',
-            cancelButtonText: 'Batal',
-            confirmButtonColor: '#d33',
-            cancelButtonColor: '#3085d6'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                // Jika user pilih Ya, redirect ke controller truncate
-                window.location.href = url;
-            }
-        });
     });
 </script>
