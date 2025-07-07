@@ -125,7 +125,7 @@ $items = $data['items'];
         <div class="kwitansi">
             <div class="kop">
                 KWITANSI PEMBAYARAN SERAGAM<br>
-                SMK Negeri 1 Purwokerto
+              
             </div>
 
             <div class="info">
@@ -182,7 +182,7 @@ $items = $data['items'];
         <div class="kwitansi">
             <div class="kop">
                 KWITANSI PEMBAYARAN SERAGAM<br>
-                SMK Negeri 1 Purwokerto
+                
             </div>
 
             <div class="info">
@@ -193,9 +193,6 @@ $items = $data['items'];
                     <div><strong>Guna Membayar:</strong> Seragam Sekolah</div>
                 </div>
                 <div class="col">
-
-                    <div><strong>NISN:</strong> <?= htmlspecialchars($tx['nis']) ?></div>
-                    <div><strong>Jurusan:</strong> <?= htmlspecialchars($tx['jurusan']) ?></div>
                 </div>
             </div>
 
@@ -210,6 +207,9 @@ $items = $data['items'];
                 Purwokerto, <?= date('d-m-Y', strtotime($tx['tanggal_transaksi'])) ?><br>
                 Petugas,<br><br><br>
 
+            </div>
+            <div class="inf">
+                <i>Ket. Barang yang sudah dibeli tidak boleh dikembalikan</i>
             </div>
         </div>
 
