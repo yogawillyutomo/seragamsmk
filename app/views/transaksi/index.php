@@ -1,5 +1,6 @@
 <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 <style>
     .ui-autocomplete {
         z-index: 1050;
@@ -374,7 +375,7 @@
                 </button>
 
 
-                ${item.status === 'batal' && "<?= $_SESSION['role']; ?>" === 'admin' ? `
+                ${"<?= $_SESSION['role']; ?>" === 'admin' ? `
                 <button class='btn btn-warning btn-sm text-nowrap btnEdit' data-id='${item.id}' data-kode='${item.kode_transaksi}'>
                     <i class="bi bi-pencil-square me-1"></i> Edit
                 </button>` : ''}
@@ -546,11 +547,19 @@
         $('.harga').text('Rp. 0');
         $('#total').val('');
         $('#totalDisplay').text('');
+
+        $('.status').val('tidak_beli');
+        $('.ukuran').val('standar').trigger('change'); // force re-hitung harga
+        $('.ukuranCustom').prop('disabled', true).val('');
         updateButtonState();
     }
 
     $("#btnTambah").click(function() {
         $("#formTambahTransaksi")[0].reset();
+
+        $('.status').val('tidak_beli');
+        $('.ukuran').val('standar').trigger('change'); // force re-hitung harga
+        $('.ukuranCustom').prop('disabled', true).val('');
 
 
         const inputJumlahBayar = document.getElementById("jumlahBayar");
@@ -894,6 +903,15 @@
     document.getElementById("formTambahTransaksi").addEventListener("submit", function(event) {
         event.preventDefault(); // Mencegah submit langsung
 
+        const valid = $("#seragamList tr").toArray().some(row => {
+            const status = $(row).find('.status').val();
+            const ukuran = $(row).find('.ukuran').val();
+            return status !== 'tidak_beli' && ukuran;
+        });
+        if (!valid) {
+            return Swal.fire('Perhatian', 'Pilih minimal satu seragam dan ukuran!', 'warning');
+        }
+
         // Ambil informasi siswa
         let namaSiswa = document.getElementById("siswa").value;
         let jurusan = document.getElementById("jurusan").value;
@@ -940,10 +958,13 @@
     // Proses transaksi ke controller setelah konfirmasi
     document.getElementById("btnProsesTransaksi").addEventListener("click", function() {
         let form = document.getElementById("formTambahTransaksi");
-        // let dataForm = new FormData(form); // Mengambil data dari form
-        // dataForm.forEach((value, key) => {
-        //     console.log(`${key}: ${value}`);
-        // });
+
+        const $btn = $('#btnProsesTransaksi');
+        // 1) Disable tombol dan ganti HTML ke spinner
+        $btn.prop('disabled', true)
+            .html('<span class="spinner-border spinner-border-sm me-1" role="status"></span> Menyimpan…');
+
+
         let formData = {
             siswa_id: $("#siswa_id").val(),
             metode_pembayaran: $("#metodePembayaran").val(),
@@ -996,6 +1017,11 @@
             .catch(error => {
                 console.error("Error:", error);
                 alert("Terjadi kesalahan.");
+            })
+            .finally(() => {
+               
+                $btn.prop('disabled', false)
+                    .html('<i class="bi bi-save me-1"></i> Ya, Simpan');
             });
 
     });

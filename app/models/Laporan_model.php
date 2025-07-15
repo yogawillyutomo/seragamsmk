@@ -166,8 +166,8 @@ class Laporan_model extends BaseModel
 
         // filter kasir (bila bukan admin)
         if ($role !== 'admin') {
-            $sql      .= " AND t.kasir_id = :me";
-            $params['me'] = $userId;
+            $sql      .= " AND t.kasir_id = ?";
+            $params[]  = $userId;
         }
         // filter multi‐kasir
         if (!empty($filters['kasir'])) {

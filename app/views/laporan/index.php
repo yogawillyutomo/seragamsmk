@@ -8,6 +8,17 @@
 <!-- <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script> -->
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
+
+<style>
+    .pagination {
+        flex-wrap: wrap;
+    }
+
+    .pagination .page-item {
+        margin: 0 2px;
+    }
+</style>
+
 <div class="container mt-4">
     <h2>Laporan</h2>
 
@@ -179,26 +190,51 @@
 
         <nav>
             <ul class="pagination justify-content-center">
+                <!-- Prev -->
                 <li class="page-item <?= $data['currentPage'] == 1 ? 'disabled' : '' ?>">
-                    <a class="page-link" href="?<?= http_build_query(array_merge($_GET, ['page' => $data['currentPage'] - 1])) ?>">
-                        &laquo; Prev
-                    </a>
+                    <a class="page-link" href="?<?= http_build_query(array_merge($_GET, ['page' => $data['currentPage'] - 1])) ?>">&laquo; Prev</a>
                 </li>
-                <?php for ($p = 1; $p <= $data['totalPages']; $p++): ?>
-                    <li class="page-item <?= $p == $data['currentPage'] ? 'active' : '' ?>">
-                        <a class="page-link"
-                            href="?<?= http_build_query(array_merge($_GET, ['page' => $p])) ?>">
-                            <?= $p ?>
-                        </a>
-                    </li>
-                <?php endfor; ?>
-                <li class="page-item <?= $data['currentPage'] == $data['totalPages'] ? 'disabled' : '' ?>">
-                    <a class="page-link" href="?<?= http_build_query(array_merge($_GET, ['page' => $data['currentPage'] + 1])) ?>">
-                        Next &raquo;
-                    </a>
+
+                <?php
+                $cp    = $data['currentPage'];
+                $total = $data['totalPages'];
+                $window = 4; // jumlah halaman sebelum & sesudah current
+
+                $start = max(1, $cp - $window);
+                $end   = min($total, $cp + $window);
+
+                // Jika start > 1, tampilkan halaman 1 dan ellipsis
+                if ($start > 1) {
+                    echo '<li class="page-item"><a class="page-link" href="?' . http_build_query(array_merge($_GET, ['page' => 1])) . '">1</a></li>';
+                    if ($start > 2) {
+                        echo '<li class="page-item disabled"><span class="page-link">…</span></li>';
+                    }
+                }
+
+                // Loop halaman dari $start sampai $end
+                for ($p = $start; $p <= $end; $p++) {
+                    $active = $p == $cp ? 'active' : '';
+                    echo '<li class="page-item ' . $active . '">';
+                    echo '<a class="page-link" href="?' . http_build_query(array_merge($_GET, ['page' => $p])) . '">' . $p . '</a>';
+                    echo '</li>';
+                }
+
+                // Jika end < total, tampilkan ellipsis dan halaman terakhir
+                if ($end < $total) {
+                    if ($end < $total - 1) {
+                        echo '<li class="page-item disabled"><span class="page-link">…</span></li>';
+                    }
+                    echo '<li class="page-item"><a class="page-link" href="?' . http_build_query(array_merge($_GET, ['page' => $total])) . '">' . $total . '</a></li>';
+                }
+                ?>
+
+                <!-- Next -->
+                <li class="page-item <?= $cp == $total ? 'disabled' : '' ?>">
+                    <a class="page-link" href="?<?= http_build_query(array_merge($_GET, ['page' => $cp + 1])) ?>">Next &raquo;</a>
                 </li>
             </ul>
         </nav>
+
 
     </div>
 
